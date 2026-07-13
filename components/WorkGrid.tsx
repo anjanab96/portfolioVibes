@@ -6,6 +6,9 @@ import CaseStudyModal from "./CaseStudyModal";
 import {
   bankOperationsTooling,
   standardizingMoneyMovement,
+  addingFamilyPlan,
+  dataAutomationRules,
+  optimizingFormDesign,
   type CaseStudy,
 } from "@/lib/caseStudies";
 
@@ -34,6 +37,7 @@ const projects: Project[] = [
     title: "Adding a Family Plan",
     description:
       "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+    caseStudy: addingFamilyPlan,
     tags: [
       { label: "B2C", variant: "coral" },
       { label: "AB Testing", variant: "coral" },
@@ -75,6 +79,7 @@ const projects: Project[] = [
     title: "Data automation rules",
     description:
       "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+    caseStudy: dataAutomationRules,
     tags: [
       { label: "B2B", variant: "olive" },
       { label: "Systems thinking", variant: "olive" },
@@ -88,6 +93,7 @@ const projects: Project[] = [
     title: "Optimizing form design",
     description:
       "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+    caseStudy: optimizingFormDesign,
     tags: [
       { label: "B2B", variant: "olive" },
       { label: "UX Research", variant: "olive" },
