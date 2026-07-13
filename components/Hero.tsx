@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="mx-auto flex min-h-[calc(100vh-6rem)] max-w-[1200px] items-center px-6 sm:px-10">
       <div className="grid w-full gap-10 lg:gap-0">
         <div className="max-w-[800px] lg:col-start-1 lg:row-start-1 lg:ml-[59px] lg:max-w-[min(800px,calc(100vw_-_589px))] lg:self-start lg:pl-[6%]">
-          <h1 className="font-display text-[45px] leading-snug text-ink">
+          <h1 className="text-center font-display text-[45px] leading-snug text-ink lg:text-left">
             NJ based senior product designer with 7 years of experience.
             Passionate about building delightful solutions with a practical
             lens.
