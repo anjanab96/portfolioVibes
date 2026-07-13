@@ -69,6 +69,152 @@ export const bankOperationsTooling: CaseStudy = {
   ],
 };
 
+export const addingFamilyPlan: CaseStudy = {
+  eyebrow: "QUIZLET · B2C · Case Study",
+  title: "Adding a Family Plan",
+  sections: [
+    {
+      heading: "Overview",
+      paragraphs: [
+        "[Add 1-2 sentences on what Quizlet is and where this project fit into the product.]",
+      ],
+    },
+    {
+      heading: "Project team",
+      paragraphs: [
+        "[Add who you partnered with — PMs, engineers, content design, research, etc.]",
+      ],
+    },
+    {
+      heading: "Problem space",
+      paragraphs: [
+        "[Add the problem this SKU solved and why a family plan was needed.]",
+      ],
+    },
+    {
+      heading: "Design process",
+      subsections: [
+        {
+          label: "[Step 1 label]",
+          text: "[Describe the first phase of your process.]",
+        },
+        {
+          label: "[Step 2 label]",
+          text: "[Describe the next phase of your process.]",
+        },
+        {
+          label: "[Step 3 label]",
+          text: "[Describe how you validated or iterated on the design.]",
+        },
+      ],
+    },
+    {
+      heading: "Project impact",
+      paragraphs: ["[Add outcomes, metrics, or launch results.]"],
+    },
+  ],
+};
+
+export const dataAutomationRules: CaseStudy = {
+  eyebrow: "S&P GLOBAL · B2B · Case Study",
+  title: "Data Automation Rules",
+  sections: [
+    {
+      heading: "Overview",
+      paragraphs: [
+        "[Add 1-2 sentences on the product context at S&P Global.]",
+      ],
+    },
+    {
+      heading: "Project team",
+      paragraphs: [
+        "[Add who you partnered with — PMs, engineers, data/ops stakeholders, etc.]",
+      ],
+    },
+    {
+      heading: "Problem space",
+      paragraphs: [
+        "[Add the operational problem this automation solved and its scale/impact.]",
+      ],
+    },
+    {
+      heading: "Design process",
+      subsections: [
+        {
+          label: "[Step 1 label]",
+          text: "[Describe how you mapped the current, manual process.]",
+        },
+        {
+          label: "[Step 2 label]",
+          text: "[Describe how you designed the rules/automation framework.]",
+        },
+        {
+          label: "[Step 3 label]",
+          text: "[Describe testing or rollout with the systems-thinking angle.]",
+        },
+      ],
+    },
+    {
+      heading: "Project impact",
+      paragraphs: ["[Add outcomes, metrics, or efficiency gains.]"],
+    },
+  ],
+};
+
+export const optimizingFormDesign: CaseStudy = {
+  eyebrow: "S&P GLOBAL · B2B · Case Study",
+  title: "Optimizing Form Design",
+  sections: [
+    {
+      heading: "Overview",
+      paragraphs: [
+        "[Add 1-2 sentences on the product context at S&P Global.]",
+      ],
+    },
+    {
+      heading: "Project team",
+      paragraphs: [
+        "[Add who you partnered with — PMs, engineers, UX research, etc.]",
+      ],
+    },
+    {
+      heading: "Problem space",
+      paragraphs: [
+        "[Add the usability issues with the existing form and their business impact.]",
+      ],
+    },
+    {
+      heading: "Design process",
+      subsections: [
+        {
+          label: "[Step 1 label]",
+          text: "[Describe your research approach — audits, interviews, analytics.]",
+        },
+        {
+          label: "[Step 2 label]",
+          text: "[Describe how you redesigned the form.]",
+        },
+        {
+          label: "[Step 3 label]",
+          text: "[Describe usability testing and iteration.]",
+        },
+      ],
+    },
+    {
+      heading: "Testing results",
+      bullets: [
+        "[Add a testing finding]",
+        "[Add a testing finding]",
+        "[Add a testing finding]",
+      ],
+    },
+    {
+      heading: "Project impact",
+      paragraphs: ["[Add outcomes, metrics, or launch results.]"],
+    },
+  ],
+};
+
 export const standardizingMoneyMovement: CaseStudy = {
   eyebrow: "STASH · B2C · Case Study",
   title: "Standardizing Money Movement Flows",
