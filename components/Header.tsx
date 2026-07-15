@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { smoothScrollTo, smoothScrollToTop } from "@/lib/scrollTo";
 
@@ -10,8 +10,40 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
+const MENU_CLOSE_ANIMATION_MS = 200;
+
 export default function Header() {
+  const [isMenuMounted, setIsMenuMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function openMenu() {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setIsMenuMounted(true);
+  }
+
+  function closeMenu() {
+    setIsMenuOpen(false);
+    closeTimeoutRef.current = setTimeout(
+      () => setIsMenuMounted(false),
+      MENU_CLOSE_ANIMATION_MS
+    );
+  }
+
+  useEffect(() => {
+    if (!isMenuMounted) return;
+    const frame = requestAnimationFrame(() => setIsMenuOpen(true));
+    return () => cancelAnimationFrame(frame);
+  }, [isMenuMounted]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
@@ -62,7 +94,7 @@ export default function Header() {
 
           <button
             type="button"
-            onClick={() => setIsMenuOpen((open) => !open)}
+            onClick={() => (isMenuMounted ? closeMenu() : openMenu())}
             className="hover-lift flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink lg:hidden"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
@@ -79,15 +111,21 @@ export default function Header() {
           </button>
         </div>
 
-        {isMenuOpen && (
-          <nav className="absolute inset-x-0 top-full z-10 mx-6 flex flex-col gap-1 rounded-2xl border border-white/40 bg-cream/80 p-4 shadow-lg backdrop-blur-xl backdrop-saturate-150 sm:mx-10 lg:hidden">
+        {isMenuMounted && (
+          <nav
+            className={`absolute inset-x-0 top-full z-10 mt-2 flex origin-top flex-col gap-1 rounded-2xl border border-white/40 bg-cream p-4 text-center shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-all duration-200 ease-out lg:hidden ${
+              isMenuOpen
+                ? "translate-y-0 scale-100 opacity-100"
+                : "-translate-y-1 scale-95 opacity-0"
+            }`}
+          >
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  setIsMenuOpen(false);
+                  closeMenu();
                   smoothScrollTo(link.href.slice(1));
                 }}
                 className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-sage-card"
@@ -99,7 +137,7 @@ export default function Header() {
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
               className="hover-lift mt-2 rounded-full bg-olive px-5 py-2.5 text-center text-sm font-medium text-cream hover:bg-olive-deep"
             >
               Resume
