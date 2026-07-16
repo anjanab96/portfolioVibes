@@ -117,7 +117,13 @@
       "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/break-process.png)",
       "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/break-wireframes.png)",
       "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/break-prototype.gif)",
-      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/mm-research.png)"
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/mm-research.png)",
+      "Bash(git fetch *)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/mm-content.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/mm-roundRobin.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/mm-prototype.gif)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/automation-diagram.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/automation-flows.png)"
     ]
   }
 }

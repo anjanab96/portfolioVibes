@@ -5,15 +5,25 @@ export type CaseStudyImage = {
   alt: string;
   width: number;
   height: number;
+  fullBleed?: boolean;
+  widthPercent?: number;
 };
 
 export type CaseStudySection = {
   heading: string;
   paragraphs?: ReactNode[];
-  subsections?: { label: string; text: string; image?: CaseStudyImage }[];
+  subsections?: {
+    label: string;
+    text: string;
+    image?: CaseStudyImage;
+    images?: CaseStudyImage[];
+    imageStack?: CaseStudyImage[];
+    carousel?: CaseStudyImage[];
+  }[];
   bullets?: string[];
   image?: CaseStudyImage;
   images?: CaseStudyImage[];
+  carousel?: CaseStudyImage[];
 };
 
 export type CaseStudy = {
@@ -114,6 +124,7 @@ export const bankOperationsTooling: CaseStudy = {
         alt: "Prototype walkthrough of the break resolution tool.",
         width: 1152,
         height: 648,
+        fullBleed: true,
       },
     },
   ],
@@ -172,41 +183,100 @@ export const dataAutomationRules: CaseStudy = {
     {
       heading: "Overview",
       paragraphs: [
-        "[Add 1-2 sentences on the product context at S&P Global.]",
+        <>
+          Optimized back-office workflows in{" "}
+          <a
+            href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-coral underline hover:no-underline"
+          >
+            iLEVEL
+          </a>{" "}
+          by designing a single automation rule to manage date progression
+          across all related entities, replacing a process that previously
+          required manual, entity-by-entity rules.
+        </>,
       ],
     },
     {
-      heading: "Project team",
+      heading: "Team structure",
       paragraphs: [
-        "[Add who you partnered with — PMs, engineers, data/ops stakeholders, etc.]",
+        "Sole designer, worked with 1 product owner and a team of developers.",
       ],
     },
     {
       heading: "Problem space",
       paragraphs: [
-        "[Add the operational problem this automation solved and its scale/impact.]",
+        "Every entity in iLEVEL tracks two dates, current period and latest period, that can be advanced automatically via a rule rather than manually. Previously, each entity needed its own rule; the goal was a single rule that advances all entities in a hierarchy (Related Entities) together.",
       ],
+      image: {
+        src: "/images/automation-diagram.png",
+        alt: "Diagram showing how current period and latest period dates advance across a hierarchy of related entities.",
+        width: 721,
+        height: 279,
+      },
     },
     {
       heading: "Design process",
       subsections: [
         {
-          label: "[Step 1 label]",
-          text: "[Describe how you mapped the current, manual process.]",
+          label: "Design constraints",
+          text: "All changes had to fit within the existing modal, with minimal alteration to a process users were already comfortable with, since this automation is just one part of their daily responsibilities and we wanted to avoid unnecessary relearning.",
         },
         {
-          label: "[Step 2 label]",
-          text: "[Describe how you designed the rules/automation framework.]",
+          label: "Workflow abstraction",
+          text: "I mapped the current process as a flow chart to abstract it from the UI, letting me brainstorm workflow solutions for related entities without committing to visual design. From there, I generated multiple approaches and worked with product owners to select the best one based on release timeline and development resources.",
+          image: {
+            src: "/images/automation-flows.png",
+            alt: "Flow chart mapping the current automation process, abstracted from the UI to explore workflow solutions.",
+            width: 4817,
+            height: 5957,
+          },
         },
         {
-          label: "[Step 3 label]",
-          text: "[Describe testing or rollout with the systems-thinking angle.]",
+          label: "Design iterations",
+          text: "I began with low fidelity sketches on an iPad, then moved on to higher fidelity mockups on Figma. At this point, the team did not have a design system to pull from, so it was important for me to keep in mind that any new UI elements that I introduce to these screens would need to be consistent with the visual style of the existing product. I initially iterated based on feedback from product owners and stakeholders. Later we also included developers in the conversation and made changes based on feasibility and level of effort.",
         },
       ],
     },
     {
-      heading: "Project impact",
-      paragraphs: ["[Add outcomes, metrics, or efficiency gains.]"],
+      heading: "Final deliverables",
+      paragraphs: [
+        "The final deliverables for this project were high fidelity wireframes in Figma. I worked with developers throughout the implementation of this feature to help with visual QA and edge cases. This feature successfully shipped in July 2020 and has received positive feedback from both clients and internal users.",
+        "Based on data from Pendo:",
+      ],
+      bullets: [
+        "Used by 20 different clients",
+        "Used by 24 unique visitors",
+        "Between 55-60 automation rules created with related entities",
+      ],
+      carousel: [
+        {
+          src: "/images/automation-dash.png",
+          alt: "Dashboard view of the automation rules feature.",
+          width: 1368,
+          height: 912,
+        },
+        {
+          src: "/images/automation-1.png",
+          alt: "Automation rule configuration screen, view 1.",
+          width: 956,
+          height: 688,
+        },
+        {
+          src: "/images/automation-2.png",
+          alt: "Automation rule configuration screen, view 2.",
+          width: 956,
+          height: 688,
+        },
+        {
+          src: "/images/automation-page.png",
+          alt: "Full page view of the shipped automation rules feature.",
+          width: 956,
+          height: 682,
+        },
+      ],
     },
   ],
 };
@@ -218,49 +288,123 @@ export const optimizingFormDesign: CaseStudy = {
     {
       heading: "Overview",
       paragraphs: [
-        "[Add 1-2 sentences on the product context at S&P Global.]",
+        <>
+          Redesigned{" "}
+          <a
+            href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-coral underline hover:no-underline"
+          >
+            iLEVEL
+          </a>
+          's data upload experience, one of the platform's most critical and
+          heavily used features, replacing an outdated flow so unpolished
+          that clients built workarounds just to avoid exposing their
+          portfolio companies to it.
+        </>,
       ],
     },
     {
-      heading: "Project team",
+      heading: "About the product",
       paragraphs: [
-        "[Add who you partnered with — PMs, engineers, UX research, etc.]",
+        "iLEVEL is a tool that companies in the Private Equity and Venture Capital space utilize to track and analyze their investments. It provides methods of data collection that helps to upload information to iLEVEL, and also offers tools for creating a dashboard and visualizations to monitor the performance of a client's investments.",
+      ],
+    },
+    {
+      heading: "Team structure",
+      paragraphs: [
+        "I was the sole designer, and worked with 2 product owners and their team of developers.",
       ],
     },
     {
       heading: "Problem space",
       paragraphs: [
-        "[Add the usability issues with the existing form and their business impact.]",
+        "The data upload experience is one of the most important areas of the iLEVEL platform. It is one of the most popular ways that our clients collect and load data from their portfolio companies into iLEVEL. Without data, the capabilities of the product are useless, so this is a critical feature area. The current experience is outdated and causes our clients to create strange workarounds to avoid exposing their portfolio companies to this experience. The goal of this project was to reimagine this process and turn it into an experience that clients would be comfortable showing to their portfolio companies.",
       ],
     },
     {
       heading: "Design process",
       subsections: [
         {
-          label: "[Step 1 label]",
-          text: "[Describe your research approach — audits, interviews, analytics.]",
+          label: "Initial research",
+          text: "Since data upload is one of iLEVEL's most critical features, I conducted stakeholder interviews with end users to understand pain points with the existing system, and combed through our Salesforce database of client feedback to consolidate related feature requests and complaints.",
         },
         {
-          label: "[Step 2 label]",
-          text: "[Describe how you redesigned the form.]",
+          label: "Initial designs",
+          text: "Based on our research, I explored a few different design directions. However, after guerilla testing the new explorations with internal users, our design solution was invalidated and we went back to the drawing board. There was a negative reaction to the side panel design, as well as the progress bar/table of contents hybrid. Many stakeholders felt that it wasn't enough of a departure from our current page, and may make the reveal of the redesign underwhelming. Several participants also worried that the table of contents area would have too much white space in 90% of use cases.",
+          carousel: [
+            {
+              src: "/images/form-design-1.png",
+              alt: "Initial design exploration with a side panel showing request details.",
+              width: 1368,
+              height: 912,
+            },
+            {
+              src: "/images/form-design-2.png",
+              alt: "Initial design exploration with a progress bar and table of contents hybrid.",
+              width: 800,
+              height: 533,
+            },
+            {
+              src: "/images/form-design-3.png",
+              alt: "Initial design exploration with request details inline above the form.",
+              width: 800,
+              height: 533,
+            },
+          ],
         },
         {
-          label: "[Step 3 label]",
-          text: "[Describe usability testing and iteration.]",
+          label: "Usability testing",
+          text: "After iterating based on results from guerilla testing, I prepared a prototype with the new designs to conduct formal usability testing sessions. We wanted to keep the sessions around 45 minutes, so I wrote a script consisting of 5 tasks that encompassed the largest changes on the page. The product owner and I alternated facilitating the sessions which took place with 5 participants in total. I analyzed the findings and extracted a few key takeaways.",
+          imageStack: [
+            {
+              src: "/images/form-research.png",
+              alt: "Usability testing session notes and observations from the 5 participant sessions.",
+              width: 2212,
+              height: 1082,
+            },
+            {
+              src: "/images/form-chart.png",
+              alt: "Chart summarizing key usability testing findings and takeaways.",
+              width: 1412,
+              height: 1446,
+            },
+          ],
         },
       ],
     },
     {
-      heading: "Testing results",
-      bullets: [
-        "[Add a testing finding]",
-        "[Add a testing finding]",
-        "[Add a testing finding]",
+      heading: "Final deliverables",
+      paragraphs: [
+        "The final deliverables for this project were clickable prototypes and high fidelity wireframes in Figma. Due to this redesign being a massive development effort, the new experience is being implemented in phases. I continued to work with development as questions arose during QA.",
       ],
-    },
-    {
-      heading: "Project impact",
-      paragraphs: ["[Add outcomes, metrics, or launch results.]"],
+      carousel: [
+        {
+          src: "/images/form-final-1.png",
+          alt: "Final data upload design, view 1.",
+          width: 1368,
+          height: 912,
+        },
+        {
+          src: "/images/form-final-2.png",
+          alt: "Final data upload design, view 2.",
+          width: 1368,
+          height: 912,
+        },
+        {
+          src: "/images/form-final-3.png",
+          alt: "Final data upload design, view 3.",
+          width: 1368,
+          height: 912,
+        },
+        {
+          src: "/images/form-final-4.png",
+          alt: "Final data upload design, view 4.",
+          width: 1368,
+          height: 912,
+        },
+      ],
     },
   ],
 };
@@ -335,6 +479,12 @@ export const standardizingMoneyMovement: CaseStudy = {
         {
           label: "2. Create a framework for new money movement flows",
           text: "Defined a shared pattern that could flex across each entry point without fragmenting the experience.",
+          image: {
+            src: "/images/mm-content.png",
+            alt: "Framework outlining the shared content pattern used across money movement flows.",
+            width: 2600,
+            height: 1874,
+          },
         },
         {
           label: "3. Iterate, iterate, iterate",
@@ -343,6 +493,12 @@ export const standardizingMoneyMovement: CaseStudy = {
         {
           label: "4. Usability testing",
           text: "Validated the new flow with real users before rolling it out platform-wide.",
+          image: {
+            src: "/images/mm-roundRobin.png",
+            alt: "Round robin usability testing setup used to validate the new money movement flow.",
+            width: 1404,
+            height: 1012,
+          },
         },
       ],
     },
@@ -360,6 +516,13 @@ export const standardizingMoneyMovement: CaseStudy = {
       paragraphs: [
         "I built a robust, high-quality component that contains every money movement flow screen — giving engineering a single source of truth to build from.",
       ],
+      image: {
+        src: "/images/mm-prototype.gif",
+        alt: "Prototype walkthrough of the unified money movement flow component.",
+        width: 1322,
+        height: 1246,
+        widthPercent: 65,
+      },
     },
   ],
 };

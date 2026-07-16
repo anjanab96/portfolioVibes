@@ -106,10 +106,8 @@ export default function Header() {
                   e.preventDefault();
                   smoothScrollTo(link.href.slice(1));
                 }}
-                className={`border-b-[3px] pb-1 text-sm font-medium text-ink transition-colors hover:text-coral ${
-                  activeHref === link.href
-                    ? "border-coral"
-                    : "border-transparent"
+                className={`text-sm font-medium transition-colors hover:text-coral ${
+                  activeHref === link.href ? "text-coral" : "text-ink"
                 }`}
               >
                 {link.label}
