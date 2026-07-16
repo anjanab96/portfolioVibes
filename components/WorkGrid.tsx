@@ -123,7 +123,7 @@ function ProjectCard({
             }
           : undefined
       }
-      className="hover-lift card-interactive rounded-2xl bg-sage-card p-8"
+      className="hover-lift hover-outline-olive card-interactive rounded-2xl bg-sage-card p-8"
     >
       <Image
         src={project.companyLogo}
@@ -166,7 +166,7 @@ function NextProjectCard() {
 }
 
 export default function WorkGrid() {
-  const [openCaseStudy, setOpenCaseStudy] = useState<CaseStudy | null>(null);
+  const [openProject, setOpenProject] = useState<Project | null>(null);
 
   return (
     <section id="work" className="mx-auto max-w-[1200px] px-6 pb-24 sm:px-10">
@@ -175,16 +175,21 @@ export default function WorkGrid() {
           <ProjectCard
             key={project.title}
             project={project}
-            onOpen={() => setOpenCaseStudy(project.caseStudy ?? null)}
+            onOpen={() => setOpenProject(project)}
           />
         ))}
         <NextProjectCard />
       </div>
 
-      {openCaseStudy && (
+      {openProject?.caseStudy && (
         <CaseStudyModal
-          caseStudy={openCaseStudy}
-          onClose={() => setOpenCaseStudy(null)}
+          caseStudy={openProject.caseStudy}
+          tags={openProject.tags}
+          companyLogo={openProject.companyLogo}
+          companyLogoAlt={openProject.companyLogoAlt}
+          companyLogoWidth={openProject.companyLogoWidth}
+          companyLogoHeight={openProject.companyLogoHeight}
+          onClose={() => setOpenProject(null)}
         />
       )}
     </section>

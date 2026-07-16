@@ -1,15 +1,31 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 const CLOSE_ANIMATION_MS = 280;
 
+type Tag = {
+  label: string;
+  variant: "coral" | "olive";
+};
+
 export default function CaseStudyModal({
   caseStudy,
+  tags,
+  companyLogo,
+  companyLogoAlt,
+  companyLogoWidth,
+  companyLogoHeight,
   onClose,
 }: {
   caseStudy: CaseStudy;
+  tags: Tag[];
+  companyLogo: string;
+  companyLogoAlt: string;
+  companyLogoWidth: number;
+  companyLogoHeight: number;
   onClose: () => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -66,15 +82,33 @@ export default function CaseStudyModal({
         </button>
 
         <div className="overflow-y-auto px-8 py-12 sm:px-14">
-          <p className="text-xs font-semibold tracking-wide text-label-blue">
-            {caseStudy.eyebrow}
-          </p>
+          <Image
+            src={companyLogo}
+            alt={companyLogoAlt}
+            width={companyLogoWidth}
+            height={companyLogoHeight}
+            className="h-4 w-auto"
+          />
           <h2
             id="case-study-title"
-            className="mt-2 font-display text-4xl text-ink"
+            className="mt-3 font-display text-4xl text-ink"
           >
             {caseStudy.title}
           </h2>
+          <div className="mt-3 flex gap-2">
+            {tags.map((tag) => (
+              <span
+                key={tag.label}
+                className={`rounded-full px-3 py-1 text-xs font-medium text-cream ${
+                  tag.variant === "coral" ? "bg-coral" : "bg-olive-deep"
+                }`}
+              >
+                {tag.label}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-8 h-px w-full" style={{ backgroundColor: "#D9D9D9" }} />
 
           {caseStudy.sections.map((section) => (
             <section key={section.heading} className="mt-10">
@@ -101,6 +135,15 @@ export default function CaseStudyModal({
                       <p className="mt-1 text-sm leading-relaxed text-ink-soft">
                         {sub.text}
                       </p>
+                      {sub.image && (
+                        <Image
+                          src={sub.image.src}
+                          alt={sub.image.alt}
+                          width={sub.image.width}
+                          height={sub.image.height}
+                          className="mt-4 h-auto w-full rounded-xl"
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -113,27 +156,38 @@ export default function CaseStudyModal({
                   ))}
                 </ul>
               )}
+
+              {section.image && (
+                <Image
+                  src={section.image.src}
+                  alt={section.image.alt}
+                  width={section.image.width}
+                  height={section.image.height}
+                  unoptimized={section.image.src.endsWith(".gif")}
+                  className={
+                    section.image.src.endsWith(".gif")
+                      ? "mt-5 h-auto max-w-none w-[calc(100%+4rem)] -mx-8 rounded-none sm:w-[calc(100%+7rem)] sm:-mx-14 sm:rounded-xl"
+                      : "mt-5 h-auto w-full rounded-xl"
+                  }
+                />
+              )}
+
+              {section.images && (
+                <div className="mt-5 grid grid-cols-3 gap-4">
+                  {section.images.map((image) => (
+                    <Image
+                      key={image.src}
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                      className="h-auto w-full rounded-xl"
+                    />
+                  ))}
+                </div>
+              )}
             </section>
           ))}
-
-          {caseStudy.stats && (
-            <div className="mt-4 grid gap-4 sm:grid-cols-3">
-              {caseStudy.stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-2xl bg-sage-card p-5 text-center"
-                >
-                  <p className="text-sm text-ink-soft">
-                    <span className="line-through">{stat.before}</span>
-                  </p>
-                  <p className="mt-1 font-display text-2xl text-ink">
-                    {stat.after}
-                  </p>
-                  <p className="mt-2 text-xs text-ink-soft">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </div>
