@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import type { CaseStudy } from "@/lib/caseStudies";
+import type { CaseStudy, CaseStudyImage } from "@/lib/caseStudies";
 
 const CLOSE_ANIMATION_MS = 280;
 
@@ -10,6 +10,68 @@ type Tag = {
   label: string;
   variant: "coral" | "olive";
 };
+
+function Carousel({ images }: { images: CaseStudyImage[] }) {
+  const [index, setIndex] = useState(0);
+
+  function goPrev() {
+    setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+  }
+
+  function goNext() {
+    setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+  }
+
+  const current = images[index];
+
+  return (
+    <div className="relative mt-5">
+      <Image
+        src={current.src}
+        alt={current.alt}
+        width={current.width}
+        height={current.height}
+        className="h-auto w-full rounded-xl"
+      />
+
+      <button
+        type="button"
+        onClick={goPrev}
+        aria-label="Previous image"
+        className="hover-lift absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-cream/80 text-ink shadow-md hover:bg-cream"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
+          <path d="M15 6l-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        onClick={goNext}
+        aria-label="Next image"
+        className="hover-lift absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-cream/80 text-ink shadow-md hover:bg-cream"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-5 w-5">
+          <path d="M9 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      <div className="mt-3 flex justify-center gap-1.5">
+        {images.map((image, i) => (
+          <button
+            key={image.src}
+            type="button"
+            onClick={() => setIndex(i)}
+            aria-label={`Go to image ${i + 1}`}
+            className={`h-1.5 w-1.5 rounded-full transition-colors ${
+              i === index ? "bg-coral" : "bg-ink/20"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function CaseStudyModal({
   caseStudy,
@@ -29,7 +91,17 @@ export default function CaseStudyModal({
   onClose: () => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(min-width: 640px)").matches
+  );
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 640px)");
+    const updateIsDesktop = () => setIsDesktop(mql.matches);
+    mql.addEventListener("change", updateIsDesktop);
+    return () => mql.removeEventListener("change", updateIsDesktop);
+  }, []);
 
   function handleClose() {
     setIsVisible(false);
@@ -141,9 +213,43 @@ export default function CaseStudyModal({
                           alt={sub.image.alt}
                           width={sub.image.width}
                           height={sub.image.height}
-                          className="mt-4 h-auto w-full rounded-xl"
+                          style={
+                            sub.image.widthPercent
+                              ? { width: `${sub.image.widthPercent}%` }
+                              : undefined
+                          }
+                          className={
+                            sub.image.widthPercent
+                              ? "mx-auto mt-4 h-auto rounded-xl"
+                              : "mt-4 h-auto w-full rounded-xl"
+                          }
                         />
                       )}
+                      {sub.images && (
+                        <div className="mt-4 grid grid-cols-3 gap-4">
+                          {sub.images.map((image) => (
+                            <Image
+                              key={image.src}
+                              src={image.src}
+                              alt={image.alt}
+                              width={image.width}
+                              height={image.height}
+                              className="h-auto w-full rounded-xl"
+                            />
+                          ))}
+                        </div>
+                      )}
+                      {sub.imageStack?.map((image) => (
+                        <Image
+                          key={image.src}
+                          src={image.src}
+                          alt={image.alt}
+                          width={image.width}
+                          height={image.height}
+                          className="mt-4 h-auto w-full rounded-xl"
+                        />
+                      ))}
+                      {sub.carousel && <Carousel images={sub.carousel} />}
                     </div>
                   ))}
                 </div>
@@ -157,20 +263,34 @@ export default function CaseStudyModal({
                 </ul>
               )}
 
-              {section.image && (
-                <Image
-                  src={section.image.src}
-                  alt={section.image.alt}
-                  width={section.image.width}
-                  height={section.image.height}
-                  unoptimized={section.image.src.endsWith(".gif")}
-                  className={
-                    section.image.src.endsWith(".gif")
-                      ? "mt-5 h-auto max-w-none w-[calc(100%+4rem)] -mx-8 rounded-none sm:w-[calc(100%+7rem)] sm:-mx-14 sm:rounded-xl"
-                      : "mt-5 h-auto w-full rounded-xl"
-                  }
-                />
-              )}
+              {section.image && (() => {
+                const img = section.image;
+                const isGif = img.src.endsWith(".gif");
+                const applyFullBleed = img.fullBleed;
+                const applyWidthPercent = img.widthPercent && (!isGif || isDesktop);
+
+                return (
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    width={img.width}
+                    height={img.height}
+                    unoptimized={isGif}
+                    style={
+                      applyWidthPercent
+                        ? { width: `${img.widthPercent}%` }
+                        : undefined
+                    }
+                    className={
+                      applyFullBleed
+                        ? "mt-5 h-auto max-w-none w-[calc(100%+4rem)] -mx-8 rounded-none sm:w-[calc(100%+7rem)] sm:-mx-14 sm:rounded-xl"
+                        : applyWidthPercent
+                          ? "mx-auto mt-5 h-auto rounded-xl"
+                          : "mt-5 h-auto w-full rounded-xl"
+                    }
+                  />
+                );
+              })()}
 
               {section.images && (
                 <div className="mt-5 grid grid-cols-3 gap-4">
@@ -186,6 +306,8 @@ export default function CaseStudyModal({
                   ))}
                 </div>
               )}
+
+              {section.carousel && <Carousel images={section.carousel} />}
             </section>
           ))}
         </div>
