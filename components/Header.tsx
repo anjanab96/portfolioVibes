@@ -15,6 +15,7 @@ const MENU_CLOSE_ANIMATION_MS = 200;
 export default function Header() {
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState<string | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function openMenu() {
@@ -42,6 +43,34 @@ export default function Header() {
   useEffect(() => {
     return () => {
       if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    function updateActiveSection() {
+      const scrollPos = window.scrollY + window.innerHeight * 0.45;
+      let current: string | null = null;
+
+      for (const link of navLinks) {
+        const el = document.getElementById(link.href.slice(1));
+        if (!el) continue;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        if (scrollPos >= top && scrollPos < bottom) {
+          current = link.href;
+          break;
+        }
+      }
+
+      setActiveHref(current);
+    }
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
     };
   }, []);
 
@@ -77,7 +106,11 @@ export default function Header() {
                   e.preventDefault();
                   smoothScrollTo(link.href.slice(1));
                 }}
-                className="text-sm font-medium text-ink transition-colors hover:text-coral"
+                className={`border-b-[3px] pb-1 text-sm font-medium text-ink transition-colors hover:text-coral ${
+                  activeHref === link.href
+                    ? "border-coral"
+                    : "border-transparent"
+                }`}
               >
                 {link.label}
               </a>

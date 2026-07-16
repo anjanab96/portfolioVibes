@@ -40,13 +40,22 @@ button,
 }
 
 .hover-lift {
-  transition-property: transform, color, background-color, box-shadow;
+  transition-property: transform, color, background-color, box-shadow, outline-color;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
 .hover-lift:hover {
   transform: translateY(-2px);
+}
+
+.hover-outline-olive {
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+}
+
+.hover-outline-olive:hover {
+  outline-color: var(--color-sage-card-muted);
 }
 
 .logo-hover {
