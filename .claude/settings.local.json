@@ -126,7 +126,16 @@
       "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/automation-flows.png)",
       "Bash(git -C \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes\" log --oneline -5)",
       "Bash(echo \"exit: $?\")",
-      "Bash(git -C \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes\" status)"
+      "Bash(git -C \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes\" status)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(mkdir -p \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/videos\" && cp \"/Users/anjanabalamourougan/Documents/fp-proto.mp4\" \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/videos/fp-proto.mp4\" && ls -la \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/videos/\")",
+      "Bash(ffmpeg -version)",
+      "Bash(brew install *)",
+      "Bash(ffprobe -v error -show_entries stream=codec_type,codec_name,width,height -of default=noprint_wrappers=1 \"/Users/anjanabalamourougan/Documents/fp-proto.mp4\")",
+      "Bash(ffmpeg -y -i \"/Users/anjanabalamourougan/Documents/fp-proto.mp4\" -vcodec libx264 -crf 28 -preset slower -movflags +faststart -an fp-proto-compressed.mp4)",
+      "Bash(shasum -a 256 \"/Users/anjanabalamourougan/Documents/AnjanaBalaResume.pdf\" \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/resume.pdf\")",
+      "Bash(shasum -a 256 \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/resume.pdf\")"
     ]
   }
 }
