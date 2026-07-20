@@ -24,6 +24,7 @@ export type CaseStudySection = {
   image?: CaseStudyImage;
   images?: CaseStudyImage[];
   carousel?: CaseStudyImage[];
+  video?: { src: string };
 };
 
 export type CaseStudy = {
@@ -45,7 +46,7 @@ export const bankOperationsTooling: CaseStudy = {
             href="https://www.stash.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-coral underline hover:no-underline"
+            className="hover-lift inline-block font-bold text-coral"
           >
             Stash
           </a>
@@ -177,25 +178,15 @@ export const addingFamilyPlan: CaseStudy = {
       ],
     },
     {
-      heading: "Design process",
-      subsections: [
-        {
-          label: "[Step 1 label]",
-          text: "[Describe the first phase of your process.]",
-        },
-        {
-          label: "[Step 2 label]",
-          text: "[Describe the next phase of your process.]",
-        },
-        {
-          label: "[Step 3 label]",
-          text: "[Describe how you validated or iterated on the design.]",
-        },
+      heading: "Usability testing",
+      paragraphs: [
+        "After iterating on design with feedback from design critique and executive stakeholders, I conducted another round of research. I ran unmoderated usability testing with both free users and subscribers, focused specifically on activation, making sure users could successfully invite others to join their plan.",
       ],
     },
     {
       heading: "Project impact",
-      paragraphs: ["[Add outcomes, metrics, or launch results.]"],
+      paragraphs: ["Metrics loading...."],
+      video: { src: "/videos/fp-proto.mp4" },
     },
   ],
 };
@@ -213,7 +204,7 @@ export const dataAutomationRules: CaseStudy = {
             href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-coral underline hover:no-underline"
+            className="hover-lift inline-block font-bold text-coral"
           >
             iLEVEL
           </a>{" "}
@@ -318,7 +309,7 @@ export const optimizingFormDesign: CaseStudy = {
             href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-coral underline hover:no-underline"
+            className="hover-lift inline-block font-bold text-coral"
           >
             iLEVEL
           </a>
@@ -332,7 +323,7 @@ export const optimizingFormDesign: CaseStudy = {
     {
       heading: "About the product",
       paragraphs: [
-        "iLEVEL is a tool that companies in the Private Equity and Venture Capital space utilize to track and analyze their investments. It provides methods of data collection that helps to upload information to iLEVEL, and also offers tools for creating a dashboard and visualizations to monitor the performance of a client's investments.",
+        "iLEVEL is a tool that companies in the Private Equity and Venture Capital space utilize to track and analyze their investments. It provides methods of data collection that help upload information to iLEVEL, and also offers tools for creating a dashboard and visualizations to monitor the performance of a client's investments.",
       ],
     },
     {
@@ -452,14 +443,14 @@ export const standardizingMoneyMovement: CaseStudy = {
     {
       heading: "Problem space",
       paragraphs: [
-        "Our users are interacting with our app in different ways dependent on their device. This is a result of previously siloed teams and workflows. In addition to lack of platform parity, we have many UI patterns to accomplish similar tasks. For example, we have 3 different flows with for adding money to the platform.",
+        "Our users are interacting with our app in different ways dependent on their device. This is a result of previously siloed teams and workflows. In addition to lack of platform parity, we have many UI patterns to accomplish similar tasks. For example, we have 3 different flows for adding money to the platform.",
         <>
           To learn more about our design system, check out this{" "}
           <a
             href="https://www.figma.com/customers/how-stash-builds-financial-products-customers-trust/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-coral underline hover:no-underline"
+            className="hover-lift inline-block font-bold text-coral"
           >
             Stash X Figma case study
           </a>

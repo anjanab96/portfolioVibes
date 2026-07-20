@@ -308,6 +308,15 @@ export default function CaseStudyModal({
               )}
 
               {section.carousel && <Carousel images={section.carousel} />}
+
+              {section.video && (
+                <video
+                  src={section.video.src}
+                  controls
+                  playsInline
+                  className="mt-5 h-auto w-full rounded-xl"
+                />
+              )}
             </section>
           ))}
         </div>
