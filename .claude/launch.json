@@ -6,7 +6,7 @@
       "runtimeExecutable": "/bin/bash",
       "runtimeArgs": [
         "-c",
-        "export PATH=\"$HOME/.local/node-v24.18.0-darwin-arm64/bin:$PATH\" && cd \"/Users/anjanabalamourougan/Documents/Portfolio\" && npm run dev"
+        "export PATH=\"$HOME/.local/node-v24.18.0-darwin-arm64/bin:$PATH\" && cd \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes\" && npm run dev"
       ],
       "port": 3000
     }

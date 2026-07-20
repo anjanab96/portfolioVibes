@@ -123,7 +123,10 @@
       "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/mm-roundRobin.png)",
       "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/mm-prototype.gif)",
       "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/automation-diagram.png)",
-      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/automation-flows.png)"
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/anjanabalamourougan/Documents/Portfolio/public/images/automation-flows.png)",
+      "Bash(git -C \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes\" log --oneline -5)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git -C \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes\" status)"
     ]
   }
 }
