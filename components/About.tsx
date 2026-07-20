@@ -21,8 +21,17 @@ export default function About() {
             Hi I&apos;m Anjana 👋🏾
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-            Most recently designing monetization experiences at Quizlet. Studied Business/Comp Sci, started out in web dev, ended up in
-            design (thank goodness!). I am a generalist with 6+ YOE in
+            Most recently designing monetization experiences at{" "}
+            <a
+              href="https://quizlet.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover-lift inline-block font-bold text-coral"
+            >
+              Quizlet
+            </a>
+            . Studied Business/Comp Sci, started out in web dev, ended up in
+            design (thank goodness!). I am a generalist with 7 YOE in
             Fintech and Edtech across B2B and B2C products. Grew up in ATL
             but now based in Jersey City and I am here to stay!
           </p>

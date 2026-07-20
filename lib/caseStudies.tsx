@@ -137,19 +137,43 @@ export const addingFamilyPlan: CaseStudy = {
     {
       heading: "Overview",
       paragraphs: [
-        "[Add 1-2 sentences on what Quizlet is and where this project fit into the product.]",
+        <>
+          Designed the end-to-end experience for{" "}
+          <a
+            href="https://quizlet.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover-lift inline-block font-bold text-coral"
+          >
+            Quizlet
+          </a>
+          's new family plan offering, including the plans page, checkout
+          flow, and plan management.
+        </>,
       ],
     },
     {
       heading: "Project team",
       paragraphs: [
-        "[Add who you partnered with — PMs, engineers, content design, research, etc.]",
+        "Worked with a lead designer, product manager, tech lead, UX researcher, and content designer.",
       ],
     },
     {
       heading: "Problem space",
       paragraphs: [
-        "[Add the problem this SKU solved and why a family plan was needed.]",
+        "Many similar consumer subscription products already offer family plans, giving users a way to share access friends and family at a lower combined cost. Given how price-sensitive Quizlet's user base is, a family plan offered a way to make subscriptions more affordable while increasing retention.",
+      ],
+    },
+    {
+      heading: "Initial research",
+      paragraphs: [
+        "We concept tested group subscription plans with both free users and paid subscribers to understand how they perceived shared plans and who they'd realistically share with. Contrary to the \"family plan\" framing, we learned users were far more likely to share with classmates and friends than with household or family members.",
+      ],
+    },
+    {
+      heading: "Design approach",
+      paragraphs: [
+        "Given the timeline pressure to ship before spring semester began, I skipped low-fidelity exploration and went straight to high-fidelity mockups, leveraging existing UI patterns from group order management and settings flows to speed up implementation.",
       ],
     },
     {
