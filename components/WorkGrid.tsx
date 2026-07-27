@@ -96,7 +96,7 @@ const projects: Project[] = [
     caseStudy: optimizingFormDesign,
     tags: [
       { label: "B2B", variant: "olive" },
-      { label: "UX Research", variant: "olive" },
+      { label: "Research facilitation", variant: "olive" },
     ],
   },
 ];
