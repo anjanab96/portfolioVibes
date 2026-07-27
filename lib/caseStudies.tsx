@@ -185,7 +185,7 @@ export const addingFamilyPlan: CaseStudy = {
     },
     {
       heading: "Project impact",
-      paragraphs: ["Metrics loading...."],
+      paragraphs: ["Metrics to come...."],
       video: { src: "/videos/fp-proto.mp4" },
     },
   ],
