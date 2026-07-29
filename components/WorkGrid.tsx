@@ -36,7 +36,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Adding a Family Plan",
     description:
-      "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+      "Designed the E2E experience for a new SKU in Quizlet's subscription offerings.",
     caseStudy: addingFamilyPlan,
     tags: [
       { label: "B2C", variant: "coral" },
@@ -50,7 +50,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Banking Dispute Tooling",
     description:
-      "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+      "Building in-house internal tooling for the debit/ACH dispute ecosystem.",
     caseStudy: bankOperationsTooling,
     tags: [
       { label: "B2B", variant: "olive" },
@@ -64,7 +64,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Unifying transaction UX",
     description:
-      "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+      "Standardized money movement flows across 3 transaction surfaces.",
     caseStudy: standardizingMoneyMovement,
     tags: [
       { label: "B2C", variant: "coral" },
@@ -78,7 +78,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Data automation rules",
     description:
-      "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+      "Updating automation rule logic for financial dashboards.",
     caseStudy: dataAutomationRules,
     tags: [
       { label: "B2B", variant: "olive" },
@@ -92,7 +92,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Optimizing form design",
     description:
-      "Adding to the current offerings with a family plan, starting a SKU from scratch.",
+      "Redesigning the data collection experience for GPs, LPs, and their portfolio companies.",
     caseStudy: optimizingFormDesign,
     tags: [
       { label: "B2B", variant: "olive" },
@@ -123,20 +123,20 @@ function ProjectCard({
             }
           : undefined
       }
-      className="hover-lift hover-outline-olive card-interactive rounded-2xl bg-sage-card p-8"
+      className="hover-lift hover-outline-olive card-interactive flex h-full flex-col rounded-2xl bg-sage-card p-8"
     >
       <Image
         src={project.companyLogo}
         alt={project.companyLogoAlt}
         width={project.companyLogoWidth}
         height={project.companyLogoHeight}
-        className="h-4 w-auto"
+        className="h-4 w-auto self-start"
       />
       <h3 className="mt-3 font-display text-2xl text-ink">
         {project.title}
       </h3>
       <p className="mt-3 text-sm text-ink-soft">{project.description}</p>
-      <div className="mt-5 flex gap-2">
+      <div className="mt-auto flex gap-2 pt-5">
         {project.tags.map((tag) => (
           <span
             key={tag.label}
