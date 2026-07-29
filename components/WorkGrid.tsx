@@ -36,7 +36,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Adding a Family Plan",
     description:
-      "Designed the E2E experience for a new SKU in Quizlet's subscription offerings.",
+      "Created a new SKU and designed the end-to-end experience, driving a 1% increase in revenue.",
     caseStudy: addingFamilyPlan,
     tags: [
       { label: "B2C", variant: "coral" },
@@ -50,7 +50,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Banking Dispute Tooling",
     description:
-      "Building in-house internal tooling for the debit/ACH dispute ecosystem.",
+      "Built in-house tooling for the debit/ACH dispute ecosystem, enabling operations team members to work 4x faster.",
     caseStudy: bankOperationsTooling,
     tags: [
       { label: "B2B", variant: "olive" },
@@ -64,7 +64,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Unifying transaction UX",
     description:
-      "Standardized money movement flows across 3 transaction surfaces.",
+      "Unified patterns across 3 product surfaces where transactions occur, reducing cognitive load and promoting consistency.",
     caseStudy: standardizingMoneyMovement,
     tags: [
       { label: "B2C", variant: "coral" },
@@ -78,7 +78,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Data automation rules",
     description:
-      "Updating automation rule logic for financial dashboards.",
+      "Introduced hierarchy based logic to data management automations to substantially reduce workload for 20 clients.",
     caseStudy: dataAutomationRules,
     tags: [
       { label: "B2B", variant: "olive" },
@@ -92,7 +92,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Optimizing form design",
     description:
-      "Redesigning the data collection experience for GPs, LPs, and their portfolio companies.",
+      "Redesigned an outdated experience, cutting workarounds and speeding up data collection by 10%.",
     caseStudy: optimizingFormDesign,
     tags: [
       { label: "B2B", variant: "olive" },

@@ -135,7 +135,10 @@
       "Bash(ffprobe -v error -show_entries stream=codec_type,codec_name,width,height -of default=noprint_wrappers=1 \"/Users/anjanabalamourougan/Documents/fp-proto.mp4\")",
       "Bash(ffmpeg -y -i \"/Users/anjanabalamourougan/Documents/fp-proto.mp4\" -vcodec libx264 -crf 28 -preset slower -movflags +faststart -an fp-proto-compressed.mp4)",
       "Bash(shasum -a 256 \"/Users/anjanabalamourougan/Documents/AnjanaBalaResume.pdf\" \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/resume.pdf\")",
-      "Bash(shasum -a 256 \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/resume.pdf\")"
+      "Bash(shasum -a 256 \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/resume.pdf\")",
+      "Bash(npx vercel *)",
+      "Bash(npm run *)",
+      "Bash(ps -p 4531 -o pid,ppid,command)"
     ]
   }
 }
