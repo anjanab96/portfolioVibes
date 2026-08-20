@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 const milesdane = localFont({
-  src: "./fonts/MilesdaneTrial.otf",
+  src: "./fonts/Milesdane.otf",
   variable: "--font-milesdane",
   display: "swap",
 });

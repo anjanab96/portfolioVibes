@@ -138,7 +138,10 @@
       "Bash(shasum -a 256 \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/resume.pdf\")",
       "Bash(npx vercel *)",
       "Bash(npm run *)",
-      "Bash(ps -p 4531 -o pid,ppid,command)"
+      "Bash(ps -p 4531 -o pid,ppid,command)",
+      "Bash(shasum -a 256 \"/Users/anjanabalamourougan/Documents/anjanaresume.pdf\" \"/Users/anjanabalamourougan/Documents/GitHub/portfolioVibes/public/resume.pdf\")",
+      "Bash(gh api *)",
+      "Bash(curl -sI \"https://www.anjanabala.com/resume.pdf\")"
     ]
   }
 }
