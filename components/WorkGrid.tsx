@@ -18,6 +18,8 @@ type Tag = {
 };
 
 type Project = {
+  previewImage: string;
+  previewImageAlt: string;
   companyLogo: string;
   companyLogoAlt: string;
   companyLogoWidth: number;
@@ -30,6 +32,8 @@ type Project = {
 
 const projects: Project[] = [
   {
+    previewImage: "/images/addingFP.png",
+    previewImageAlt: "Adding a Family Plan product screens",
     companyLogo: "/images/quizlet.svg",
     companyLogoAlt: "Quizlet",
     companyLogoWidth: 77,
@@ -44,6 +48,8 @@ const projects: Project[] = [
     ],
   },
   {
+    previewImage: "/images/bankingDispute.png",
+    previewImageAlt: "Banking Dispute Tooling product screens",
     companyLogo: "/images/logo-stash.svg",
     companyLogoAlt: "Stash",
     companyLogoWidth: 70,
@@ -58,6 +64,8 @@ const projects: Project[] = [
     ],
   },
   {
+    previewImage: "/images/unifyingTransaction.png",
+    previewImageAlt: "Unifying transaction UX product screens",
     companyLogo: "/images/logo-stash.svg",
     companyLogoAlt: "Stash",
     companyLogoWidth: 70,
@@ -72,6 +80,8 @@ const projects: Project[] = [
     ],
   },
   {
+    previewImage: "/images/dataAutomation.png",
+    previewImageAlt: "Data automation rules product screens",
     companyLogo: "/images/logo-sp-global.svg",
     companyLogoAlt: "S&P Global",
     companyLogoWidth: 70,
@@ -86,6 +96,8 @@ const projects: Project[] = [
     ],
   },
   {
+    previewImage: "/images/optimizingForm.png",
+    previewImageAlt: "Optimizing form design product screens",
     companyLogo: "/images/logo-sp-global.svg",
     companyLogoAlt: "S&P Global",
     companyLogoWidth: 70,
@@ -123,30 +135,41 @@ function ProjectCard({
             }
           : undefined
       }
-      className="hover-lift hover-outline-olive card-interactive flex h-full flex-col rounded-2xl bg-sage-card p-8"
+      className="hover-lift hover-outline-olive card-interactive flex h-full flex-col overflow-hidden rounded-2xl border border-[#C8DAC0] bg-sage-card"
     >
-      <Image
-        src={project.companyLogo}
-        alt={project.companyLogoAlt}
-        width={project.companyLogoWidth}
-        height={project.companyLogoHeight}
-        className="h-4 w-auto self-start"
-      />
-      <h3 className="mt-3 font-display text-2xl text-ink">
-        {project.title}
-      </h3>
-      <p className="mt-3 text-sm text-ink-soft">{project.description}</p>
-      <div className="mt-auto flex gap-2 pt-5">
-        {project.tags.map((tag) => (
-          <span
-            key={tag.label}
-            className={`rounded-full px-3 py-1 text-xs font-medium text-cream ${
-              tag.variant === "coral" ? "bg-coral" : "bg-olive-deep"
-            }`}
-          >
-            {tag.label}
-          </span>
-        ))}
+      <div className="relative aspect-[1300/452] w-full overflow-hidden bg-cream">
+        <Image
+          src={project.previewImage}
+          alt={project.previewImageAlt}
+          fill
+          sizes="(min-width: 640px) 50vw, 100vw"
+          className="object-cover object-top"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <Image
+          src={project.companyLogo}
+          alt={project.companyLogoAlt}
+          width={project.companyLogoWidth}
+          height={project.companyLogoHeight}
+          className="h-4 w-auto self-start"
+        />
+        <h3 className="mt-3 font-display text-2xl text-ink">
+          {project.title}
+        </h3>
+        <p className="mt-3 text-sm text-ink-soft">{project.description}</p>
+        <div className="mt-auto flex gap-2 pt-5">
+          {project.tags.map((tag) => (
+            <span
+              key={tag.label}
+              className={`rounded-full px-3 py-1 text-xs font-medium text-cream ${
+                tag.variant === "coral" ? "bg-coral" : "bg-olive-deep"
+              }`}
+            >
+              {tag.label}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -154,13 +177,32 @@ function ProjectCard({
 
 function NextProjectCard() {
   return (
-    <div className="flex h-full flex-col justify-center rounded-2xl bg-sage-card-muted p-8">
-      <h3 className="font-display text-2xl text-ink-soft/70">
-        Next project loading...
-      </h3>
-      <p className="mt-3 text-sm text-ink-soft/60">
-        [Insert your company here]
-      </p>
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-[#C8DAC0] bg-sage-card-muted">
+      <div className="relative aspect-[1300/452] w-full overflow-hidden bg-cream">
+        <Image
+          src="/images/nextProjectWireframe.svg"
+          alt="Wireframe sketches for an upcoming project"
+          fill
+          sizes="(min-width: 640px) 50vw, 100vw"
+          className="object-cover object-top opacity-30"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-6">
+        <span className="text-sm text-ink-soft/70">[Your company]</span>
+        <h3 className="mt-3 font-display text-2xl text-ink-soft/70">
+          Next project loading...
+        </h3>
+        <div className="mt-auto flex flex-wrap gap-2 pt-5">
+          {["Let's", "make", "something", "awesome"].map((word) => (
+            <span
+              key={word}
+              className="rounded-full border border-dashed border-ink-soft/45 px-3 py-1 text-xs font-medium text-ink-soft"
+            >
+              {word}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
