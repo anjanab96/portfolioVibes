@@ -40,7 +40,7 @@ button,
 }
 
 .hover-lift {
-  transition-property: transform, color, background-color, box-shadow, outline-color;
+  transition-property: transform, color, background-color, border-color, box-shadow, outline-color;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
@@ -69,6 +69,15 @@ button,
 
 .card-interactive:hover {
   box-shadow: 0 12px 28px -10px rgba(38, 36, 29, 0.28);
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 .carousel-mask {

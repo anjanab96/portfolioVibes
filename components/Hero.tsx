@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { smoothScrollTo } from "@/lib/scrollTo";
 
 const IMPACT_PHRASES = [
   "increase your deposit rate by 4%.",
   "increase your subscription revenue by 1%.",
-  "decrease operating expenses by $2000 / month.",
+  "decrease your operating expenses by $2000 per month.",
 ];
 
 export default function Hero() {
@@ -21,8 +20,8 @@ export default function Hero() {
       timeoutId = setTimeout(() => {
         setIndex((i) => (i + 1) % IMPACT_PHRASES.length);
         setVisible(true);
-      }, 300);
-    }, 2800);
+      }, 500);
+    }, 2900);
     return () => {
       clearInterval(intervalId);
       clearTimeout(timeoutId);
@@ -30,42 +29,59 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-6rem)] max-w-[1200px] items-center px-6 sm:px-10">
-      <div className="grid w-full gap-10 lg:gap-0">
-        <div className="max-w-[800px] lg:col-start-1 lg:row-start-1 lg:ml-[59px] lg:max-w-[min(800px,calc(100vw_-_589px))] lg:self-start lg:pl-[6%]">
-          <h1 className="text-center font-display text-[32px] leading-snug text-ink sm:text-[45px] lg:text-left">
-            {"NJ based product designer with 7 YOE. Let me\u00A0"}
-            <span
-              className={`inline text-coral transition-opacity duration-300 ${
-                visible ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              {IMPACT_PHRASES[index]}
-            </span>
-          </h1>
-          <a
-            href="#work"
-            onClick={(e) => {
-              e.preventDefault();
-              smoothScrollTo("work");
-            }}
-            className="hover-lift mx-auto mt-6 flex w-fit items-center gap-1.5 rounded-full bg-coral px-6 py-3 text-sm font-medium text-cream hover:bg-coral-dark lg:mx-0 lg:rounded-none lg:bg-transparent lg:px-0 lg:py-0 lg:text-[28px] lg:text-coral lg:hover:bg-transparent lg:hover:text-coral-dark"
-          >
-            See my work <span aria-hidden>→</span>
-          </a>
-        </div>
+    <div className="relative">
+      {/* Bold twin blobs: decorative background circles. The bottom-left
+          pair bleeds past this section's own bottom edge so it reads as
+          continuing behind the work grid carousel below. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-visible"
+      >
+        <div className="absolute -top-10 -right-14 h-[190px] w-[190px] rounded-full bg-coral/15 sm:-top-20 sm:-right-24 sm:h-[360px] sm:w-[360px] lg:-top-24 lg:-right-28 lg:h-[440px] lg:w-[440px]" />
+        <div className="absolute -top-3 -right-6 h-[160px] w-[160px] rounded-full border border-coral/35 sm:-top-8 sm:-right-12 sm:h-[310px] sm:w-[310px] lg:-top-10 lg:-right-14 lg:h-[380px] lg:w-[380px]" />
 
-        <div className="relative mx-auto h-[186px] w-[186px] sm:h-[233px] sm:w-[233px] lg:col-start-1 lg:row-start-1 lg:mx-0 lg:mt-0 lg:mr-[59px] lg:h-[369px] lg:w-[369px] lg:justify-self-end lg:self-end">
-          <Image
-            src="/images/flowers.png"
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 369px, (min-width: 640px) 233px, 186px"
-            className="object-contain -rotate-90"
-            priority
-          />
-        </div>
+        <div className="absolute -bottom-[110px] -left-14 h-[190px] w-[190px] rounded-full bg-olive/12 sm:-bottom-[240px] sm:-left-24 sm:h-[360px] sm:w-[360px] lg:-bottom-[300px] lg:-left-28 lg:h-[440px] lg:w-[440px]" />
+        <div className="absolute -bottom-[85px] -left-6 h-[160px] w-[160px] rounded-full border border-olive/35 sm:-bottom-[190px] sm:-left-12 sm:h-[310px] sm:w-[310px] lg:-bottom-[240px] lg:-left-14 lg:h-[380px] lg:w-[380px]" />
       </div>
-    </section>
+
+      <section className="relative mx-auto flex min-h-[calc(100vh-6rem)] max-w-[1000px] flex-col items-center px-6 pb-12 text-center sm:px-10 sm:pb-16">
+        <div className="flex flex-1 flex-col items-center justify-center">
+          <h1 className="font-display text-[36px] leading-tight text-ink sm:text-[48px] lg:text-[68px]">
+            NJ based senior product designer with 7 years of experience.
+          </h1>
+          <p
+            className={`mt-5 max-w-[320px] font-display text-lg text-ink transition-all duration-500 ease-[cubic-bezier(0,0,0.2,1)] sm:mt-6 sm:max-w-2xl sm:text-xl lg:max-w-[720px] lg:text-2xl ${
+              visible ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
+            }`}
+          >
+            {"Together we can "}
+            <span className="text-coral">{IMPACT_PHRASES[index]}</span>
+          </p>
+        </div>
+        <a
+          href="#work"
+          onClick={(e) => {
+            e.preventDefault();
+            smoothScrollTo("work");
+          }}
+          className="hover-lift group flex flex-col items-center gap-2 text-coral hover:text-coral-dark"
+        >
+          <span className="text-lg font-medium sm:text-xl">See my work</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            className="h-5 w-5 transition-transform duration-200 group-hover:translate-y-1"
+          >
+            <path
+              d="M12 4v16M6 14l6 6 6-6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+      </section>
+    </div>
   );
 }
