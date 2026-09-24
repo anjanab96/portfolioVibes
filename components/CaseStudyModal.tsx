@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import type { CaseStudy, CaseStudyImage } from "@/lib/caseStudies";
 
@@ -109,8 +110,16 @@ export default function CaseStudyModal({
   }
 
   useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    // <html> has overflow-x-hidden, which makes it the scroll container, so
+    // both it and <body> need locking for the page behind to stop scrolling.
+    const { documentElement: html, body } = document;
+    const originalHtmlOverflow = html.style.overflow;
+    const originalBodyOverflow = body.style.overflow;
+    const originalBodyPaddingRight = body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - html.clientWidth;
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
 
     const frame = requestAnimationFrame(() => setIsVisible(true));
 
@@ -120,7 +129,9 @@ export default function CaseStudyModal({
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = originalOverflow;
+      html.style.overflow = originalHtmlOverflow;
+      body.style.overflow = originalBodyOverflow;
+      body.style.paddingRight = originalBodyPaddingRight;
       window.removeEventListener("keydown", handleKeyDown);
       cancelAnimationFrame(frame);
       if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
@@ -128,7 +139,9 @@ export default function CaseStudyModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  // Portal to <body> so the modal escapes WorkGrid's stacking context
+  // (relative z-0) and layers above the fixed header.
+  return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center sm:p-6">
       <div
         className={`modal-scrim absolute inset-0 bg-ink/60 backdrop-blur-sm ${isVisible ? "modal-visible" : ""}`}
@@ -153,7 +166,7 @@ export default function CaseStudyModal({
           </svg>
         </button>
 
-        <div className="overflow-y-auto px-8 py-12 sm:px-14">
+        <div className="overflow-y-auto overscroll-contain px-8 py-12 sm:px-14">
           <Image
             src={companyLogo}
             alt={companyLogoAlt}
@@ -321,6 +334,7 @@ export default function CaseStudyModal({
           ))}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
