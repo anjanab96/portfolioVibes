@@ -176,11 +176,14 @@ export default function CaseStudyModal({
           />
           <h2
             id="case-study-title"
-            className="mt-3 font-display text-4xl text-ink"
+            className="mt-3 font-display text-3xl text-ink"
           >
             {caseStudy.title}
           </h2>
-          <div className="mt-3 flex gap-2">
+          <p className="mt-4 text-sm leading-snug text-ink-soft sm:text-base">
+            {caseStudy.overview}
+          </p>
+          <div className="mt-6 flex gap-2">
             {tags.map((tag) => (
               <span
                 key={tag.label}
