@@ -30,33 +30,32 @@ export type CaseStudySection = {
 export type CaseStudy = {
   eyebrow: string;
   title: string;
+  // One-line summary shown under the title in the modal header.
+  overview: ReactNode;
   sections: CaseStudySection[];
 };
 
 export const bankOperationsTooling: CaseStudy = {
   eyebrow: "STASH · B2B · Case Study",
-  title: "Bank Operations Tooling",
+  title: "Banking Dispute Tooling",
+  overview: (
+    <>
+      Building out{" "}
+      <a
+        href="https://www.stash.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover-lift inline-block font-bold text-coral"
+      >
+        Stash
+      </a>
+      's debit dispute tooling ecosystem 0→1, sparked by our sponsor bank
+      transition and a push to bring operations tooling in-house. This
+      case study covers one of several tools I designed from scratch as
+      part of that broader initiative.
+    </>
+  ),
   sections: [
-    {
-      heading: "Overview",
-      paragraphs: [
-        <>
-          Building out{" "}
-          <a
-            href="https://www.stash.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover-lift inline-block font-bold text-coral"
-          >
-            Stash
-          </a>
-          's debit dispute tooling ecosystem 0→1, sparked by our sponsor bank
-          transition and a push to bring operations tooling in-house. This
-          case study covers one of several tools I designed from scratch as
-          part of that broader initiative.
-        </>,
-      ],
-    },
     {
       heading: "Project team",
       paragraphs: [
@@ -134,25 +133,22 @@ export const bankOperationsTooling: CaseStudy = {
 export const addingFamilyPlan: CaseStudy = {
   eyebrow: "QUIZLET · B2C · Case Study",
   title: "Adding a Family Plan",
+  overview: (
+    <>
+      Designed the end-to-end experience for{" "}
+      <a
+        href="https://quizlet.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover-lift inline-block font-bold text-coral"
+      >
+        Quizlet
+      </a>
+      's new family plan offering, including the plans page, checkout
+      flow, and plan management.
+    </>
+  ),
   sections: [
-    {
-      heading: "Overview",
-      paragraphs: [
-        <>
-          Designed the end-to-end experience for{" "}
-          <a
-            href="https://quizlet.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover-lift inline-block font-bold text-coral"
-          >
-            Quizlet
-          </a>
-          's new family plan offering, including the plans page, checkout
-          flow, and plan management.
-        </>,
-      ],
-    },
     {
       heading: "Project team",
       paragraphs: [
@@ -194,26 +190,23 @@ export const addingFamilyPlan: CaseStudy = {
 export const dataAutomationRules: CaseStudy = {
   eyebrow: "S&P GLOBAL · B2B · Case Study",
   title: "Data Automation Rules",
+  overview: (
+    <>
+      Optimized back-office workflows in{" "}
+      <a
+        href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover-lift inline-block font-bold text-coral"
+      >
+        iLEVEL
+      </a>{" "}
+      by designing a single automation rule to manage date progression
+      across all related entities, replacing a process that previously
+      required manual, entity-by-entity rules.
+    </>
+  ),
   sections: [
-    {
-      heading: "Overview",
-      paragraphs: [
-        <>
-          Optimized back-office workflows in{" "}
-          <a
-            href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover-lift inline-block font-bold text-coral"
-          >
-            iLEVEL
-          </a>{" "}
-          by designing a single automation rule to manage date progression
-          across all related entities, replacing a process that previously
-          required manual, entity-by-entity rules.
-        </>,
-      ],
-    },
     {
       heading: "Team structure",
       paragraphs: [
@@ -299,27 +292,24 @@ export const dataAutomationRules: CaseStudy = {
 export const optimizingFormDesign: CaseStudy = {
   eyebrow: "S&P GLOBAL · B2B · Case Study",
   title: "Optimizing Form Design",
+  overview: (
+    <>
+      Redesigned{" "}
+      <a
+        href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover-lift inline-block font-bold text-coral"
+      >
+        iLEVEL
+      </a>
+      's data upload experience, one of the platform's most critical and
+      heavily used features, replacing an outdated flow so unpolished
+      that clients built workarounds just to avoid exposing their
+      portfolio companies to it.
+    </>
+  ),
   sections: [
-    {
-      heading: "Overview",
-      paragraphs: [
-        <>
-          Redesigned{" "}
-          <a
-            href="https://www.spglobal.com/market-intelligence/en/solutions/products/ilevel"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover-lift inline-block font-bold text-coral"
-          >
-            iLEVEL
-          </a>
-          's data upload experience, one of the platform's most critical and
-          heavily used features, replacing an outdated flow so unpolished
-          that clients built workarounds just to avoid exposing their
-          portfolio companies to it.
-        </>,
-      ],
-    },
     {
       heading: "About the product",
       paragraphs: [
@@ -427,13 +417,8 @@ export const optimizingFormDesign: CaseStudy = {
 export const standardizingMoneyMovement: CaseStudy = {
   eyebrow: "STASH · B2C · Case Study",
   title: "Standardizing Money Movement Flows",
+  overview: "Developed a unified UI pattern for money movement flows across Stash, replacing inconsistent information hierarchy and layouts across features with one predictable pattern. Part of a broader initiative to establish platform parity across web, iOS, and Android.",
   sections: [
-    {
-      heading: "Overview",
-      paragraphs: [
-        "Developed a unified UI pattern for money movement flows across Stash, replacing inconsistent information hierarchy and layouts across features with one predictable pattern. Part of a broader initiative to establish platform parity across web, iOS, and Android.",
-      ],
-    },
     {
       heading: "Project team",
       paragraphs: [

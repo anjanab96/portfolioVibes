@@ -12,10 +12,19 @@ const navLinks = [
 
 const MENU_CLOSE_ANIMATION_MS = 200;
 
+// Past this, the pill frosts over so it reads against page content.
+const FROST_OFFSET_PX = 24;
+// The bar only compacts once the hero has started to scroll away.
+const COMPACT_OFFSET_PX = 120;
+// Ignore scroll deltas smaller than this so trackpad jitter doesn't flicker the bar.
+const SCROLL_THRESHOLD_PX = 8;
+
 export default function Header() {
   const [isMenuMounted, setIsMenuMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeHref, setActiveHref] = useState<string | null>(null);
+  const [isFrosted, setIsFrosted] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function openMenu() {
@@ -47,6 +56,33 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    let lastY = window.scrollY;
+
+    function updateScrollState() {
+      const y = window.scrollY;
+      setIsFrosted(y > FROST_OFFSET_PX);
+
+      if (y <= COMPACT_OFFSET_PX) {
+        setIsScrollingDown(false);
+        lastY = y;
+        return;
+      }
+
+      const delta = y - lastY;
+      if (Math.abs(delta) < SCROLL_THRESHOLD_PX) return;
+      setIsScrollingDown(delta > 0);
+      lastY = y;
+    }
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
+
+  // Keep the bar full size while the mobile menu is open.
+  const isCompact = isScrollingDown && !isMenuMounted;
+
+  useEffect(() => {
     function updateActiveSection() {
       const scrollPos = window.scrollY + window.innerHeight * 0.45;
       let current: string | null = null;
@@ -76,9 +112,19 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
-      <div className="relative mx-auto max-w-[1000px] rounded-[200px] bg-cream/20 backdrop-blur-xl backdrop-saturate-150 md:w-fit">
+      <div
+        className={`relative mx-auto max-w-[1000px] rounded-[200px] backdrop-blur-xl backdrop-saturate-150 transition-[background-color,box-shadow] duration-300 ease-out md:w-fit ${
+          isFrosted
+            ? "bg-cream/70 shadow-[0_8px_24px_-12px_rgba(38,36,29,0.25)]"
+            : "bg-cream/20 shadow-none"
+        }`}
+      >
         {/* Mobile: logo left, hamburger right */}
-        <div className="flex items-center justify-between gap-4 py-3 pl-3 pr-6 md:hidden">
+        <div
+          className={`flex items-center justify-between gap-4 pl-3 pr-6 transition-[padding] duration-300 ease-out motion-reduce:transition-none md:hidden ${
+            isCompact ? "py-1.5" : "py-3"
+          }`}
+        >
           <a
             href="#"
             onClick={(e) => {
@@ -93,7 +139,9 @@ export default function Header() {
               alt="AB logo"
               width={88}
               height={74}
-              className="h-auto w-16"
+              className={`h-auto transition-[width] duration-300 ease-out motion-reduce:transition-none ${
+                isCompact ? "w-12" : "w-16"
+              }`}
               priority
             />
           </a>
@@ -118,7 +166,11 @@ export default function Header() {
         </div>
 
         {/* Tablet/desktop: nav links centered around the logo */}
-        <nav className="hidden items-center justify-center gap-8 px-10 py-3 md:flex">
+        <nav
+          className={`hidden items-center justify-center transition-[gap,padding] duration-300 ease-out motion-reduce:transition-none md:flex ${
+            isCompact ? "gap-6 px-8 py-1.5" : "gap-8 px-10 py-3"
+          }`}
+        >
           <a
             href="#work"
             onClick={(e) => {
@@ -158,7 +210,9 @@ export default function Header() {
               alt="AB logo"
               width={88}
               height={74}
-              className="h-auto w-14"
+              className={`h-auto transition-[width] duration-300 ease-out motion-reduce:transition-none ${
+                isCompact ? "w-11" : "w-14"
+              }`}
             />
           </a>
 
