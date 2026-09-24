@@ -40,11 +40,11 @@ export default function Hero() {
         <div className="absolute -top-10 -right-14 h-[190px] w-[190px] rounded-full bg-coral/15 sm:-top-20 sm:-right-24 sm:h-[360px] sm:w-[360px] lg:-top-24 lg:-right-28 lg:h-[440px] lg:w-[440px]" />
         <div className="absolute -top-3 -right-6 h-[160px] w-[160px] rounded-full border border-coral/35 sm:-top-8 sm:-right-12 sm:h-[310px] sm:w-[310px] lg:-top-10 lg:-right-14 lg:h-[380px] lg:w-[380px]" />
 
-        <div className="absolute -bottom-[110px] -left-14 h-[190px] w-[190px] rounded-full bg-olive/12 sm:-bottom-[240px] sm:-left-24 sm:h-[360px] sm:w-[360px] lg:-bottom-[300px] lg:-left-28 lg:h-[440px] lg:w-[440px]" />
-        <div className="absolute -bottom-[85px] -left-6 h-[160px] w-[160px] rounded-full border border-olive/35 sm:-bottom-[190px] sm:-left-12 sm:h-[310px] sm:w-[310px] lg:-bottom-[240px] lg:-left-14 lg:h-[380px] lg:w-[380px]" />
+        <div className="absolute bottom-4 -left-14 h-[190px] w-[190px] rounded-full bg-olive/12 sm:-left-24 sm:h-[460px] sm:w-[460px] lg:-left-28 lg:h-[600px] lg:w-[600px]" />
+        <div className="absolute bottom-4 -left-6 h-[160px] w-[160px] rounded-full border border-olive/35 sm:-left-12 sm:h-[400px] sm:w-[400px] lg:-left-14 lg:h-[520px] lg:w-[520px]" />
       </div>
 
-      <section className="relative mx-auto flex min-h-[calc(100vh-6rem)] max-w-[1000px] flex-col items-center px-6 pb-12 text-center sm:px-10 sm:pb-16">
+      <section className="relative mx-auto flex min-h-[calc(100vh-6rem)] max-w-[1000px] flex-col items-center px-6 pb-[58px] text-center sm:px-10 sm:pb-[77px]">
         <div className="flex flex-1 flex-col items-center justify-center">
           <h1 className="font-display text-[36px] leading-tight text-ink sm:text-[48px] lg:text-[68px]">
             NJ based senior product designer with 7 years of experience.

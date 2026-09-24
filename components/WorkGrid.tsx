@@ -330,35 +330,49 @@ export default function WorkGrid() {
   }
 
   return (
-    <section id="work" className="mx-auto max-w-[1200px] px-6 pb-24 sm:px-10">
-      <div
-        ref={scrollRef}
-        onScroll={handleScroll}
-        className="no-scrollbar carousel-mask -mx-6 flex snap-x snap-mandatory items-center gap-6 overflow-x-auto scroll-smooth px-6 py-4 sm:-mx-10 sm:px-10"
-      >
-        {loopedProjects.map((project, i) => {
-          const copy = Math.floor(i / SLIDE_COUNT);
-          const isFocused = i === focusedIndex;
-          return (
-            <div
-              key={`${project.title}-${copy}`}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              inert={copy !== MIDDLE_COPY}
-              className={`w-[80%] shrink-0 snap-center transition-all duration-300 ease-out sm:w-[58%] lg:w-[52%] ${
-                isFocused
-                  ? "scale-100 opacity-100"
-                  : "scale-[0.88] opacity-50 grayscale"
-              }`}
-            >
-              <ProjectCard
-                project={project}
-                onOpen={() => setOpenProject(project)}
-              />
-            </div>
-          );
-        })}
+    <section
+      id="work"
+      className="relative z-0 mx-auto max-w-[1200px] px-6 pb-24 sm:px-10"
+    >
+      <div className="relative">
+        {/* Full-viewport-width backdrop sized to just the card row (not the
+            whole section) so the carousel's masked edges always fade into
+            solid page background with no seam, while the hero's blob still
+            shows through in the rest of the section — below the row, around
+            the dots — where there's no card to bleed through. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 left-1/2 -z-10 w-screen -translate-x-1/2 bg-cream"
+        />
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="no-scrollbar carousel-mask -mx-6 flex snap-x snap-mandatory items-center gap-6 overflow-x-auto scroll-smooth px-6 py-10 sm:-mx-10 sm:px-10"
+        >
+          {loopedProjects.map((project, i) => {
+            const copy = Math.floor(i / SLIDE_COUNT);
+            const isFocused = i === focusedIndex;
+            return (
+              <div
+                key={`${project.title}-${copy}`}
+                ref={(el) => {
+                  cardRefs.current[i] = el;
+                }}
+                inert={copy !== MIDDLE_COPY}
+                className={`w-[80%] shrink-0 snap-center transition-all duration-300 ease-out sm:w-[58%] lg:w-[52%] ${
+                  isFocused
+                    ? "scale-110 opacity-100"
+                    : "scale-[0.88] opacity-50 grayscale"
+                }`}
+              >
+                <ProjectCard
+                  project={project}
+                  onOpen={() => setOpenProject(project)}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <div className="mt-6 flex items-center justify-center gap-2">
