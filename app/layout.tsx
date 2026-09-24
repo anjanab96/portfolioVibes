@@ -27,8 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${milesdane.variable}`}>
-      <body className="bg-cream text-ink antialiased">
+    <html
+      lang="en"
+      className={`overflow-x-hidden ${inter.variable} ${milesdane.variable}`}
+    >
+      <body className="overflow-x-hidden bg-cream text-ink antialiased">
         <CursorSparkles />
         {children}
       </body>

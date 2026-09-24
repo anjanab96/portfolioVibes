@@ -76,8 +76,9 @@ export default function Header() {
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6">
-      <div className="relative mx-auto max-w-[1000px] rounded-[200px] bg-cream/20 py-3 pl-3 pr-6 backdrop-blur-xl backdrop-saturate-150 sm:pl-4 sm:pr-10">
-        <div className="flex items-center justify-between gap-4">
+      <div className="relative mx-auto max-w-[1000px] rounded-[200px] bg-cream/20 backdrop-blur-xl backdrop-saturate-150 md:w-fit">
+        {/* Mobile: logo left, hamburger right */}
+        <div className="flex items-center justify-between gap-4 py-3 pl-3 pr-6 md:hidden">
           <a
             href="#"
             onClick={(e) => {
@@ -92,41 +93,15 @@ export default function Header() {
               alt="AB logo"
               width={88}
               height={74}
-              className="h-auto w-16 sm:w-[88px]"
+              className="h-auto w-16"
               priority
             />
           </a>
 
-          <nav className="hidden items-center gap-8 lg:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  smoothScrollTo(link.href.slice(1));
-                }}
-                className={`text-sm font-medium transition-colors hover:text-coral ${
-                  activeHref === link.href ? "text-coral" : "text-ink"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover-lift shrink-0 rounded-full bg-olive px-5 py-2 text-sm font-medium text-cream hover:bg-olive-deep"
-            >
-              Resume
-            </a>
-          </nav>
-
           <button
             type="button"
             onClick={() => (isMenuMounted ? closeMenu() : openMenu())}
-            className="hover-lift flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink lg:hidden"
+            className="hover-lift flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
           >
@@ -142,9 +117,76 @@ export default function Header() {
           </button>
         </div>
 
+        {/* Tablet/desktop: nav links centered around the logo */}
+        <nav className="hidden items-center justify-center gap-8 px-10 py-3 md:flex">
+          <a
+            href="#work"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollTo("work");
+            }}
+            className={`text-sm font-medium transition-colors hover:text-coral ${
+              activeHref === "#work" ? "text-coral" : "text-ink"
+            }`}
+          >
+            Work
+          </a>
+          <a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollTo("about");
+            }}
+            className={`text-sm font-medium transition-colors hover:text-coral ${
+              activeHref === "#about" ? "text-coral" : "text-ink"
+            }`}
+          >
+            About
+          </a>
+
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollToTop();
+            }}
+            className="logo-hover shrink-0"
+            aria-label="Home"
+          >
+            <Image
+              src="/images/logo.png"
+              alt="AB logo"
+              width={88}
+              height={74}
+              className="h-auto w-14"
+            />
+          </a>
+
+          <a
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollTo("contact");
+            }}
+            className={`text-sm font-medium transition-colors hover:text-coral ${
+              activeHref === "#contact" ? "text-coral" : "text-ink"
+            }`}
+          >
+            Contact
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-ink transition-colors hover:text-coral"
+          >
+            Resume
+          </a>
+        </nav>
+
         {isMenuMounted && (
           <nav
-            className={`absolute inset-x-0 top-full z-10 mt-2 flex origin-top flex-col gap-1 rounded-2xl border border-white/40 bg-cream p-4 text-center shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-all duration-200 ease-out lg:hidden ${
+            className={`absolute inset-x-0 top-full z-10 mt-2 flex origin-top flex-col gap-1 rounded-2xl border border-white/40 bg-cream p-4 text-center shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-all duration-200 ease-out md:hidden ${
               isMenuOpen
                 ? "translate-y-0 scale-100 opacity-100"
                 : "-translate-y-1 scale-95 opacity-0"
