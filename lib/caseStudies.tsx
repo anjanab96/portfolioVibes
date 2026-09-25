@@ -27,17 +27,34 @@ export type CaseStudySection = {
   video?: { src: string };
 };
 
+// Missing fields render as a placeholder in the modal.
+export type CaseStudyMetadata = {
+  team?: string;
+  timeline?: string;
+  platform?: string;
+  userGroup?: string;
+};
+
 export type CaseStudy = {
   eyebrow: string;
   title: string;
   // One-line summary shown under the title in the modal header.
   overview: ReactNode;
+  // Shown under the header; a placeholder renders until one is added.
+  heroImage?: CaseStudyImage;
+  metadata: CaseStudyMetadata;
   sections: CaseStudySection[];
 };
 
 export const bankOperationsTooling: CaseStudy = {
   eyebrow: "STASH · B2B · Case Study",
   title: "Banking Dispute Tooling",
+  heroImage: {
+    src: "/images/break-hero-v2.webp",
+    alt: "Line item detail view layered over the MOM Portal table of resolved dispute items",
+    width: 2000,
+    height: 1125,
+  },
   overview: (
     <>
       Building out{" "}
@@ -50,18 +67,16 @@ export const bankOperationsTooling: CaseStudy = {
         Stash
       </a>
       's debit dispute tooling ecosystem 0→1, sparked by our sponsor bank
-      transition and a push to bring operations tooling in-house. This
-      case study covers one of several tools I designed from scratch as
-      part of that broader initiative.
+      transition and a push to bring operations tooling in-house.
     </>
   ),
+  metadata: {
+    team: "2 PMs, 2 Eng Leads, Compliance",
+    timeline: "4 months",
+    platform: "Desktop",
+    userGroup: "Internal banking operation agents",
+  },
   sections: [
-    {
-      heading: "Project team",
-      paragraphs: [
-        "Cross-squad initiative. I worked with two product managers, two engineering leads, and the bank operations team.",
-      ],
-    },
     {
       heading: "Problem space",
       paragraphs: [
@@ -133,6 +148,12 @@ export const bankOperationsTooling: CaseStudy = {
 export const addingFamilyPlan: CaseStudy = {
   eyebrow: "QUIZLET · B2C · Case Study",
   title: "Adding a Family Plan",
+  heroImage: {
+    src: "/images/family-plan-hero.webp",
+    alt: "Quizlet Family invite screen on mobile alongside the Quizlet plans page with the Family plan highlighted",
+    width: 2000,
+    height: 1125,
+  },
   overview: (
     <>
       Designed the end-to-end experience for{" "}
@@ -148,13 +169,13 @@ export const addingFamilyPlan: CaseStudy = {
       flow, and plan management.
     </>
   ),
+  metadata: {
+    team: "Lead designer, PM, eng lead, UXR, content design",
+    timeline: "9 months",
+    platform: "Desktop, iOS, Android",
+    userGroup: "Undergraduate students, ages 18–24",
+  },
   sections: [
-    {
-      heading: "Project team",
-      paragraphs: [
-        "Worked with a lead designer, product manager, tech lead, UX researcher, and content designer.",
-      ],
-    },
     {
       heading: "Problem space",
       paragraphs: [
@@ -190,6 +211,12 @@ export const addingFamilyPlan: CaseStudy = {
 export const dataAutomationRules: CaseStudy = {
   eyebrow: "S&P GLOBAL · B2B · Case Study",
   title: "Data Automation Rules",
+  heroImage: {
+    src: "/images/automation-hero.webp",
+    alt: "iLEVEL Set Current & Latest rules table with the Define Rules modal open over it",
+    width: 2000,
+    height: 1125,
+  },
   overview: (
     <>
       Optimized back-office workflows in{" "}
@@ -206,13 +233,13 @@ export const dataAutomationRules: CaseStudy = {
       required manual, entity-by-entity rules.
     </>
   ),
+  metadata: {
+    team: "Product manager, Eng Lead",
+    timeline: "8 months",
+    platform: "Desktop",
+    userGroup: "Back office finance teams",
+  },
   sections: [
-    {
-      heading: "Team structure",
-      paragraphs: [
-        "Sole designer, worked with 1 product owner and a team of developers.",
-      ],
-    },
     {
       heading: "Problem space",
       paragraphs: [
@@ -292,6 +319,12 @@ export const dataAutomationRules: CaseStudy = {
 export const optimizingFormDesign: CaseStudy = {
   eyebrow: "S&P GLOBAL · B2B · Case Study",
   title: "Optimizing Form Design",
+  heroImage: {
+    src: "/images/form-hero.webp",
+    alt: "iLEVEL Monthly Financials Request upload form on desktop alongside the same request on mobile",
+    width: 2000,
+    height: 1125,
+  },
   overview: (
     <>
       Redesigned{" "}
@@ -309,17 +342,17 @@ export const optimizingFormDesign: CaseStudy = {
       portfolio companies to it.
     </>
   ),
+  metadata: {
+    team: "2 PMs, 2 Eng Leads",
+    timeline: "6 months",
+    platform: "Desktop and iOS",
+    userGroup: "Back office finance teams",
+  },
   sections: [
     {
       heading: "About the product",
       paragraphs: [
         "iLEVEL is a tool that companies in the Private Equity and Venture Capital space utilize to track and analyze their investments. It provides methods of data collection that help upload information to iLEVEL, and also offers tools for creating a dashboard and visualizations to monitor the performance of a client's investments.",
-      ],
-    },
-    {
-      heading: "Team structure",
-      paragraphs: [
-        "I was the sole designer, and worked with 2 product owners and their team of developers.",
       ],
     },
     {
@@ -417,14 +450,20 @@ export const optimizingFormDesign: CaseStudy = {
 export const standardizingMoneyMovement: CaseStudy = {
   eyebrow: "STASH · B2C · Case Study",
   title: "Standardizing Money Movement Flows",
+  heroImage: {
+    src: "/images/mm-hero.webp",
+    alt: "Three Stash invest screens: amount selection sheet on a Tesla stock page, amount keypad, and order review before buying TSLA",
+    width: 2000,
+    height: 1125,
+  },
   overview: "Developed a unified UI pattern for money movement flows across Stash, replacing inconsistent information hierarchy and layouts across features with one predictable pattern. Part of a broader initiative to establish platform parity across web, iOS, and Android.",
+  metadata: {
+    team: "Content design lead, Design systems team",
+    timeline: "2 months",
+    platform: "Web, iOS, Android",
+    userGroup: "Financial novices, internal designers",
+  },
   sections: [
-    {
-      heading: "Project team",
-      paragraphs: [
-        "Partnered with head of content design and design systems team.",
-      ],
-    },
     {
       heading: "Problem space",
       paragraphs: [
