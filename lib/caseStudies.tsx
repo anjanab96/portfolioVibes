@@ -449,7 +449,7 @@ export const optimizingFormDesign: CaseStudy = {
 
 export const standardizingMoneyMovement: CaseStudy = {
   eyebrow: "STASH · B2C · Case Study",
-  title: "Standardizing Money Movement Flows",
+  title: "Standardizing Money Movement",
   heroImage: {
     src: "/images/mm-hero.webp",
     alt: "Three Stash invest screens: amount selection sheet on a Tesla stock page, amount keypad, and order review before buying TSLA",

@@ -65,12 +65,12 @@ const projects: Project[] = [
   },
   {
     previewImage: "/images/unifyingTransaction.png",
-    previewImageAlt: "Unifying transaction UX product screens",
+    previewImageAlt: "Standardizing Money Movement product screens",
     companyLogo: "/images/logo-stash.svg",
     companyLogoAlt: "Stash",
     companyLogoWidth: 70,
     companyLogoHeight: 20,
-    title: "Unifying transaction UX",
+    title: "Standardizing Money Movement",
     description:
       "Unified patterns across 3 product surfaces where transactions occur, reducing cognitive load and promoting consistency.",
     caseStudy: standardizingMoneyMovement,
