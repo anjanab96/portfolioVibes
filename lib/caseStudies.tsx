@@ -94,10 +94,10 @@ export const bankOperationsTooling: CaseStudy = {
         },
       ],
       image: {
-        src: "/images/break.png",
-        alt: "Diagram showing settlement file and internal ledger feeding into Duco, which outputs a break list. There are 2 types of breaks: a transaction exists in one file but not the other, or the transaction exists in both files but the dollar amounts don't match.",
-        width: 1036,
-        height: 412,
+        src: "/images/break-diagram-v2.png",
+        alt: "Diagram showing the settlement file from Mastercard and the internal ledger from Mambu feeding into Duco, which generates a daily break list. There are 2 types of breaks: a transaction exists in one file but not the other, or it exists in both files but the dollar amounts don't match.",
+        width: 2400,
+        height: 1000,
       },
     },
     {
@@ -109,12 +109,12 @@ export const bankOperationsTooling: CaseStudy = {
         },
         {
           label: "Understanding the current process",
-          text: "There are two flavors of breaks: ACH and Debit. There are slight nuances to how each one is investigated, uncovered via stakeholder interviews.",
+          text: "There are two flavors of breaks: ACH and Debit. There are slight nuances to how each one is investigated, uncovered via stakeholder interviews. The flows below show one example of how an investigation of each type can go. The exact steps vary from break to break.",
           image: {
-            src: "/images/break-process.png",
-            alt: "Diagram mapping the current ACH and Debit break investigation workflows.",
-            width: 2174,
-            height: 1827,
+            src: "/images/break-process-flow.png",
+            alt: "Flow diagram of example ACH and debit card break investigations. ACH: Duco flags a break, the KAOS team searches Datadog while ops agents filter Mambu by hand, both confirm the transaction is in both files, and the result is no error. Debit card: Duco flags a break, then Mambu, Datadog, and the settlement file in AWS S3 show the difference is interchange income, so it is not a real break. Each break takes 5+ minutes to investigate, across 34 to 242 breaks a week.",
+            width: 2400,
+            height: 1660,
           },
         },
         {
@@ -561,17 +561,21 @@ export const standardizingMoneyMovement: CaseStudy = {
             alt: "Round robin usability testing setup used to validate the new money movement flow.",
             width: 1404,
             height: 1012,
+            widthPercent: 90,
           },
         },
       ],
-    },
-    {
-      heading: "Testing results",
-      bullets: [
-        "4/4 users successfully completed the flow",
-        "3/4 users understood how to change the frequency",
-        "4/4 users successfully navigated from the partial to full experience",
-        "3/4 users understood the concept of cash balance vs. linked funding source",
+      stats: [
+        { value: "4/4", label: "Users successfully completed the flow" },
+        { value: "3/4", label: "Users understood how to change the frequency" },
+        {
+          value: "4/4",
+          label: "Users navigated from the partial to the full experience",
+        },
+        {
+          value: "3/4",
+          label: "Users understood cash balance vs. linked funding source",
+        },
       ],
     },
     {

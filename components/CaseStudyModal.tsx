@@ -396,7 +396,7 @@ export default function CaseStudyModal({
               {section.stats && (
                 <div
                   className={`mt-5 grid gap-3 ${
-                    section.stats.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"
+                    section.stats.length % 2 === 0 ? "sm:grid-cols-2" : "sm:grid-cols-3"
                   }`}
                 >
                   {section.stats.map((stat) => (
