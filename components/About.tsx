@@ -12,6 +12,21 @@ const funFacts = [
   { icon: "/images/sewing.svg", label: "Acquiring another crafty hobby" },
 ];
 
+const experience = [
+  { company: "Quizlet", role: "Senior Product Designer", dates: "Mar 2025 – Jun 2026" },
+  { company: "Stash", role: "Senior Product Designer", dates: "Jun 2022 – Oct 2024" },
+  { company: "Morgan Stanley", role: "Senior UX Designer", dates: "Jan 2022 – May 2022" },
+  { company: "IHS Markit", role: "UX Designer", dates: "Dec 2019 – Jan 2022" },
+];
+
+const certificates = [
+  { name: "Prototyping with AI", issuer: "IDEO U" },
+  {
+    name: "Visual Design: The Ultimate Guide",
+    issuer: "Interaction Design Foundation",
+  },
+];
+
 export default function About() {
   return (
     <section id="about" className="mx-auto max-w-[900px] px-6 pb-24 sm:px-10">
@@ -21,7 +36,7 @@ export default function About() {
             Hi I&apos;m Anjana 👋🏾
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-            Most recently designing monetization experiences at{" "}
+            Most recently, I designed monetization experiences at{" "}
             <a
               href="https://quizlet.com/"
               target="_blank"
@@ -30,10 +45,22 @@ export default function About() {
             >
               Quizlet
             </a>
-            . Studied Business/Comp Sci, started out in web dev, ended up in
-            design (thank goodness!). I am a generalist with 7 YOE in
-            Fintech and Edtech across B2B and B2C products. Grew up in ATL
-            but now based in Jersey City and I am here to stay!
+            . Before that, I spent most of my 7-year career in fintech,
+            designing everything from consumer money features to complex B2B
+            platforms.
+          </p>
+
+          <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+            I thrive in complex, fast-paced environments and have a bias
+            toward action. I like getting work shipped without letting the
+            quality of the experience slip. I studied business and computer
+            science and started out as a web developer, so I understand the
+            goals and tradeoffs my product and engineering partners are
+            working with.
+          </p>
+
+          <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+            Originally from ATL, now based in Jersey City and here to stay!
           </p>
 
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
@@ -90,6 +117,49 @@ export default function About() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      <div className="mt-16">
+        <p className="text-sm font-semibold text-ink">Experience</p>
+        <ul className="mt-4 border-b border-ink-soft/15">
+          {experience.map((job) => (
+            <li
+              key={job.company}
+              className="flex flex-col gap-1 border-t border-ink-soft/15 py-3.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
+            >
+              <p className="text-sm text-ink">
+                <span className="font-semibold">{job.company}</span>
+                <span className="text-ink-soft"> · {job.role}</span>
+              </p>
+              <p className="text-[13px] tabular-nums text-ink-soft sm:shrink-0">
+                {job.dates}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3.5 text-[13px] text-ink-soft">
+          Earlier: Popmenu, Cypress.io, and The Coca-Cola Company.
+        </p>
+
+        <div className="mt-9">
+          <p className="text-sm font-semibold text-ink">Education</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+            Georgia Institute of Technology
+            <br />
+            B.S. Business Administration, minor in Computer Science
+          </p>
+        </div>
+
+        <div className="mt-9">
+          <p className="text-sm font-semibold text-ink">Certificates</p>
+          <ul className="mt-2 space-y-1 text-sm leading-relaxed text-ink-soft">
+            {certificates.map((cert) => (
+              <li key={cert.name}>
+                {cert.name} · {cert.issuer}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
