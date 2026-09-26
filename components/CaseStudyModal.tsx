@@ -393,6 +393,28 @@ export default function CaseStudyModal({
                 </ul>
               )}
 
+              {section.stats && (
+                <div
+                  className={`mt-5 grid gap-3 ${
+                    section.stats.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"
+                  }`}
+                >
+                  {section.stats.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="rounded-2xl bg-sage-card-muted p-5"
+                    >
+                      <p className="font-display text-4xl leading-none text-ink">
+                        {stat.value}
+                      </p>
+                      <p className="mt-3 text-sm leading-snug text-ink-soft">
+                        {stat.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               {section.image && (() => {
                 const img = section.image;
                 const isGif = img.src.endsWith(".gif");

@@ -21,6 +21,11 @@ export type CaseStudySection = {
     carousel?: CaseStudyImage[];
   }[];
   bullets?: string[];
+  // Headline metrics shown as a row of cards.
+  stats?: {
+    value: string;
+    label: string;
+  }[];
   image?: CaseStudyImage;
   images?: CaseStudyImage[];
   carousel?: CaseStudyImage[];
@@ -129,10 +134,19 @@ export const bankOperationsTooling: CaseStudy = {
       paragraphs: [
         "So far, the team has implemented Phases 1 & 2, with plans to deliver phase 3 & 4 in 2024. Some metrics from following the launch of phase 1 & 2:",
       ],
-      bullets: [
-        "Engineering effort reduced from 20 hours/week to ~1 hour/week",
-        "Reconciliation error rate reduced from 24% to 0%",
-        "Break research time reduced from 20 minutes to 5 minutes per break",
+      stats: [
+        {
+          value: "-95%",
+          label: "Engineering effort, from 20 hours/week to ~1 hour/week",
+        },
+        {
+          value: "0%",
+          label: "Reconciliation error rate, down from 24%",
+        },
+        {
+          value: "4x",
+          label: "Faster break research, from 20 minutes to 5 per break",
+        },
       ],
       image: {
         src: "/images/break-prototype.gif",
@@ -170,8 +184,8 @@ export const addingFamilyPlan: CaseStudy = {
     </>
   ),
   metadata: {
-    team: "Lead designer, PM, eng lead, UXR, content design",
-    timeline: "9 months",
+    team: "Lead designer, PM, Eng lead, UXR, Content Design",
+    timeline: "7 months",
     platform: "Desktop, iOS, Android",
     userGroup: "Undergraduate students, ages 18–24",
   },
@@ -202,7 +216,14 @@ export const addingFamilyPlan: CaseStudy = {
     },
     {
       heading: "Project impact",
-      paragraphs: ["Metrics to come...."],
+      stats: [
+        { value: "1%", label: "Overall increase in revenue" },
+        {
+          value: "0.4%",
+          label: "Share of subscription revenue from the family plan",
+        },
+        { value: "90%", label: "Checkout conversion for the family plan" },
+      ],
       video: { src: "/videos/fp-proto.mp4" },
     },
   ],
@@ -281,10 +302,13 @@ export const dataAutomationRules: CaseStudy = {
         "The final deliverables for this project were high fidelity wireframes in Figma. I worked with developers throughout the implementation of this feature to help with visual QA and edge cases. This feature successfully shipped in July 2020 and has received positive feedback from both clients and internal users.",
         "Based on data from Pendo:",
       ],
-      bullets: [
-        "Used by 20 different clients",
-        "Used by 24 unique visitors",
-        "Between 55-60 automation rules created with related entities",
+      stats: [
+        { value: "20", label: "Clients using the feature" },
+        { value: "24", label: "Unique visitors" },
+        {
+          value: "55–60",
+          label: "Automation rules created with related entities",
+        },
       ],
       carousel: [
         {
