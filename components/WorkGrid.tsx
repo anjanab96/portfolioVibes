@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  Suspense,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import CaseStudyModal from "./CaseStudyModal";
 import {
@@ -28,7 +36,11 @@ type Project = {
   description: string;
   tags: Tag[];
   caseStudy?: CaseStudy;
+  // Shareable id for the case study, used as ?case=<slug> in the URL.
+  slug?: string;
 };
+
+const CASE_STUDY_PARAM = "case";
 
 const projects: Project[] = [
   {
@@ -42,6 +54,7 @@ const projects: Project[] = [
     description:
       "Created a new SKU and designed the end-to-end experience, driving a 1% increase in revenue.",
     caseStudy: addingFamilyPlan,
+    slug: "family-plan",
     tags: [
       { label: "B2C", variant: "coral" },
       { label: "AB Testing", variant: "coral" },
@@ -58,6 +71,7 @@ const projects: Project[] = [
     description:
       "Built in-house tooling for the debit/ACH dispute ecosystem, enabling operations team members to work 4x faster.",
     caseStudy: bankOperationsTooling,
+    slug: "banking-dispute-tooling",
     tags: [
       { label: "B2B", variant: "olive" },
       { label: "Building 0→1", variant: "olive" },
@@ -74,6 +88,7 @@ const projects: Project[] = [
     description:
       "Unified patterns across 3 product surfaces where transactions occur, reducing cognitive load and promoting consistency.",
     caseStudy: standardizingMoneyMovement,
+    slug: "money-movement",
     tags: [
       { label: "B2C", variant: "coral" },
       { label: "Design systems", variant: "coral" },
@@ -90,6 +105,7 @@ const projects: Project[] = [
     description:
       "Introduced hierarchy based logic to data management automations to substantially reduce workload for 20 clients.",
     caseStudy: dataAutomationRules,
+    slug: "data-automation",
     tags: [
       { label: "B2B", variant: "olive" },
       { label: "Systems thinking", variant: "olive" },
@@ -106,6 +122,7 @@ const projects: Project[] = [
     description:
       "Redesigned an outdated experience, cutting workarounds and speeding up data collection by 10%.",
     caseStudy: optimizingFormDesign,
+    slug: "form-design",
     tags: [
       { label: "B2B", variant: "olive" },
       { label: "Research facilitation", variant: "olive" },
@@ -185,7 +202,9 @@ const MIDDLE_COPY = 1;
 const loopedProjects: Project[] = Array.from({ length: LOOPS }, () => projects).flat();
 
 export default function WorkGrid() {
-  const [openProject, setOpenProject] = useState<Project | null>(null);
+  // True when the open case study was opened from a card on this visit, so
+  // closing it can step back through history instead of adding an entry.
+  const openedInAppRef = useRef(false);
   const [focusedIndex, setFocusedIndex] = useState(MIDDLE_COPY * SLIDE_COUNT);
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -303,6 +322,32 @@ export default function WorkGrid() {
     settleTimeoutRef.current = setTimeout(recenterIfNeeded, 120);
   }
 
+  function caseStudyUrl(slug: string | null) {
+    const params = new URLSearchParams(window.location.search);
+    if (slug) params.set(CASE_STUDY_PARAM, slug);
+    else params.delete(CASE_STUDY_PARAM);
+    const query = params.toString();
+    return `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+  }
+
+  function openCaseStudy(project: Project) {
+    if (!project.slug) return;
+    window.history.pushState(null, "", caseStudyUrl(project.slug));
+    openedInAppRef.current = true;
+  }
+
+  // Opened from a card: go back, so the browser's Back button and closing
+  // the modal behave the same. Arrived via a shared link: drop the param in
+  // place so the visitor stays on the homepage.
+  function closeCaseStudy() {
+    if (openedInAppRef.current) {
+      openedInAppRef.current = false;
+      window.history.back();
+    } else {
+      window.history.replaceState(null, "", caseStudyUrl(null));
+    }
+  }
+
   function scrollToIndex(i: number) {
     const container = scrollRef.current;
     if (!container) return;
@@ -367,7 +412,7 @@ export default function WorkGrid() {
               >
                 <ProjectCard
                   project={project}
-                  onOpen={() => setOpenProject(project)}
+                  onOpen={() => openCaseStudy(project)}
                 />
               </div>
             );
@@ -392,17 +437,43 @@ export default function WorkGrid() {
         ))}
       </div>
 
-      {openProject?.caseStudy && (
-        <CaseStudyModal
-          caseStudy={openProject.caseStudy}
-          tags={openProject.tags}
-          companyLogo={openProject.companyLogo}
-          companyLogoAlt={openProject.companyLogoAlt}
-          companyLogoWidth={openProject.companyLogoWidth}
-          companyLogoHeight={openProject.companyLogoHeight}
-          onClose={() => setOpenProject(null)}
-        />
-      )}
+      {/* Reading the URL opts this subtree into client-side rendering, so
+          it sits in its own Suspense boundary and the grid still prerenders. */}
+      <Suspense fallback={null}>
+        <CaseStudyFromUrl onClose={closeCaseStudy} />
+      </Suspense>
     </section>
+  );
+}
+
+function subscribeNoop() {
+  return () => {};
+}
+
+// Renders the case study named by ?case=<slug>. The URL is the source of
+// truth, so opening a card, Back/Forward, and shared links all go through it.
+function CaseStudyFromUrl({ onClose }: { onClose: () => void }) {
+  const slug = useSearchParams().get(CASE_STUDY_PARAM);
+  // The modal portals into document.body, so it can only render in the
+  // browser — skip it during server rendering of a shared ?case= link.
+  const isClient = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false
+  );
+  const project = projects.find((p) => p.slug === slug);
+  if (!isClient || !project?.caseStudy) return null;
+
+  return (
+    <CaseStudyModal
+      key={project.slug}
+      caseStudy={project.caseStudy}
+      tags={project.tags}
+      companyLogo={project.companyLogo}
+      companyLogoAlt={project.companyLogoAlt}
+      companyLogoWidth={project.companyLogoWidth}
+      companyLogoHeight={project.companyLogoHeight}
+      onClose={onClose}
+    />
   );
 }
