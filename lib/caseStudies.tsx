@@ -226,6 +226,18 @@ export const addingFamilyPlan: CaseStudy = {
       ],
       video: { src: "/videos/fp-proto.mp4" },
     },
+    {
+      heading: "Post-launch iteration",
+      paragraphs: [
+        "After launch, we ran ongoing A/B tests on the plan card copy on the plans page and on the checkout copy. The goal was to more clearly communicate the plan's shared-access value and make sure users understood they could invite others after checking out, a friction point our data suggested was costing us conversions.",
+      ],
+    },
+    {
+      heading: "Reflection",
+      paragraphs: [
+        "The family plan converted well at checkout, at 90%, but contributed modestly to overall revenue. Our own research had shown students wanted to share with friends and classmates, not family. The product still shipped as \"Quizlet Family,\" and design-system and eng constraints meant we launched without any feature built for that group dynamic. Price ended up being the plan's only real advantage. With more room, I'd push harder to use the research earlier, before naming and positioning were locked, and fight for at least one small feature built around how students actually study together.",
+      ],
+    },
   ],
 };
 
