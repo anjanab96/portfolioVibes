@@ -199,7 +199,7 @@ export const addingFamilyPlan: CaseStudy = {
     {
       heading: "Initial research",
       paragraphs: [
-        "Before committing engineering time, I wanted to test whether \"family\" was actually how students thought about sharing a subscription. We concept tested group subscription plans with both free users and paid subscribers to understand how they perceived shared plans and who they'd realistically share with. Contrary to the \"family plan\" framing, we learned users were far more likely to share with classmates and friends than with household or family members.",
+        "Before committing engineering time, I wanted to test whether \"family\" was actually how students thought about sharing a subscription. I facilitated research sessions that looked at the subscription space holistically, talking through subscriptions outside of Quizlet to understand how students think about money and prioritize what they pay for. We also concept tested group subscription plans specifically, with both free users and paid subscribers, to understand how they perceived shared plans and who they'd realistically share with. Contrary to the \"family plan\" framing, we learned users were far more likely to share with classmates and friends than with household or family members.",
       ],
     },
     {
