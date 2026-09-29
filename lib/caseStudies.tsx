@@ -205,7 +205,7 @@ export const addingFamilyPlan: CaseStudy = {
     {
       heading: "Design approach",
       paragraphs: [
-        "Given the timeline pressure to ship before spring semester began, I skipped low-fidelity exploration and went straight to high-fidelity mockups, leveraging existing UI patterns from group order management and settings flows to speed up implementation.",
+        "Two constraints shaped my approach. Quizlet had just rolled out a server-driven design system that intentionally limited custom UI in favor of consistency and engineering velocity, and the team had thin eng resourcing for this project. Rather than spend the limited timeline pushing for novel UI, I focused my energy on flow and information architecture, reusing proven patterns from group-order and settings flows, and worked closely with engineering to keep every screen within what the new system supported. The squad hadn't worked closely with a designer before, so part of the job was introducing lightweight critique and explaining the \"why\" behind the patterns I was asking for.",
       ],
     },
     {
