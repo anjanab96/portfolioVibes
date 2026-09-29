@@ -198,14 +198,36 @@ export const addingFamilyPlan: CaseStudy = {
     },
     {
       heading: "Initial research",
-      paragraphs: [
-        "Before committing engineering time, I wanted to test whether \"family\" was actually how students thought about sharing a subscription. I facilitated research sessions that looked at the subscription space holistically, talking through subscriptions outside of Quizlet to understand how students think about money and prioritize what they pay for. We also concept tested group subscription plans specifically, with both free users and paid subscribers, to understand how they perceived shared plans and who they'd realistically share with. Contrary to the \"family plan\" framing, we learned users were far more likely to share with classmates and friends than with household or family members.",
+      subsections: [
+        {
+          label: "What we explored",
+          text: "Before committing engineering time, I wanted to test whether \"family\" was actually how students thought about sharing a subscription. I facilitated research sessions that looked at the subscription space holistically, talking through subscriptions outside of Quizlet to understand how students think about money and prioritize what they pay for.",
+        },
+        {
+          label: "What we tested",
+          text: "We also concept tested group subscription plans specifically, with both free users and paid subscribers, to understand how they perceived shared plans and who they'd realistically share with.",
+        },
+        {
+          label: "What we found",
+          text: "Contrary to the \"family plan\" framing, we learned users were far more likely to share with classmates and friends than with household or family members.",
+        },
       ],
     },
     {
       heading: "Design approach",
-      paragraphs: [
-        "Two constraints shaped my approach. Quizlet had just rolled out a server-driven design system that intentionally limited custom UI in favor of consistency and engineering velocity, and the team had thin eng resourcing for this project. Rather than spend the limited timeline pushing for novel UI, I focused my energy on flow and information architecture, reusing proven patterns from group-order and settings flows, and worked closely with engineering to keep every screen within what the new system supported. The squad hadn't worked closely with a designer before, so part of the job was introducing lightweight critique and explaining the \"why\" behind the patterns I was asking for.",
+      subsections: [
+        {
+          label: "The constraints",
+          text: "Two constraints shaped my approach. Quizlet had just rolled out a server-driven design system that intentionally limited custom UI in favor of consistency and engineering velocity, and the team had thin eng resourcing for this project.",
+        },
+        {
+          label: "How I worked within them",
+          text: "Rather than spend the limited timeline pushing for novel UI, I focused my energy on flow and information architecture, reusing proven patterns from group-order and settings flows, and worked closely with engineering to keep every screen within what the new system supported.",
+        },
+        {
+          label: "Working with the squad",
+          text: "The squad hadn't worked closely with a designer before, so part of the job was introducing lightweight critique and explaining the \"why\" behind the patterns I was asking for.",
+        },
       ],
     },
     {
