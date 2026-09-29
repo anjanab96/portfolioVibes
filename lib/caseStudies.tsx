@@ -193,13 +193,13 @@ export const addingFamilyPlan: CaseStudy = {
     {
       heading: "Problem space",
       paragraphs: [
-        "Leadership wanted Quizlet to offer a family plan, following similar subscription products that already had one. Given how price-sensitive our user base is, the hope was that a shared plan could make subscriptions more affordable while improving retention. Before committing engineering time, I wanted to test whether \"family\" was actually how students thought about sharing a subscription.",
+        "Leadership wanted Quizlet to offer a family plan, following similar subscription products that already had one. Given how price-sensitive our user base is, the hope was that a shared plan could make subscriptions more affordable while improving retention.",
       ],
     },
     {
       heading: "Initial research",
       paragraphs: [
-        "We concept tested group subscription plans with both free users and paid subscribers to understand how they perceived shared plans and who they'd realistically share with. Contrary to the \"family plan\" framing, we learned users were far more likely to share with classmates and friends than with household or family members.",
+        "Before committing engineering time, I wanted to test whether \"family\" was actually how students thought about sharing a subscription. We concept tested group subscription plans with both free users and paid subscribers to understand how they perceived shared plans and who they'd realistically share with. Contrary to the \"family plan\" framing, we learned users were far more likely to share with classmates and friends than with household or family members.",
       ],
     },
     {
