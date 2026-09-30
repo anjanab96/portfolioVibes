@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { smoothScrollTo } from "@/lib/scrollTo";
 
 const IMPACT_PHRASES = [
@@ -30,18 +31,21 @@ export default function Hero() {
 
   return (
     <div className="relative">
-      {/* Bold twin blobs: decorative background circles. The bottom-left
-          pair bleeds past this section's own bottom edge so it reads as
-          continuing behind the work grid carousel below. */}
+      {/* Watercolor flower anchored to the left edge. It starts at the top of
+          the page (behind the header) and multiplies onto the cream so the
+          image's white background disappears. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 overflow-visible"
+        className="pointer-events-none absolute inset-x-0 -top-24 bottom-0 -z-10 overflow-hidden"
       >
-        <div className="absolute -top-10 -right-14 h-[190px] w-[190px] rounded-full bg-coral/15 sm:-top-20 sm:-right-24 sm:h-[360px] sm:w-[360px] lg:-top-24 lg:-right-28 lg:h-[440px] lg:w-[440px]" />
-        <div className="absolute -top-3 -right-6 h-[160px] w-[160px] rounded-full border border-coral/35 sm:-top-8 sm:-right-12 sm:h-[310px] sm:w-[310px] lg:-top-10 lg:-right-14 lg:h-[380px] lg:w-[380px]" />
-
-        <div className="absolute bottom-4 -left-14 h-[190px] w-[190px] rounded-full bg-olive/12 sm:-left-24 sm:h-[460px] sm:w-[460px] lg:-left-28 lg:h-[600px] lg:w-[600px]" />
-        <div className="absolute bottom-4 -left-6 h-[160px] w-[160px] rounded-full border border-olive/35 sm:-left-12 sm:h-[400px] sm:w-[400px] lg:-left-14 lg:h-[520px] lg:w-[520px]" />
+        <Image
+          src="/images/hero-flower.webp"
+          alt=""
+          width={1672}
+          height={941}
+          priority
+          className="h-[55%] w-auto max-w-none -translate-x-[12%] opacity-60 mix-blend-multiply sm:h-full sm:-translate-x-[10%] sm:opacity-70 lg:opacity-80"
+        />
       </div>
 
       <section className="relative mx-auto flex min-h-[calc(100vh-6rem)] max-w-[1000px] flex-col items-center px-6 pb-[58px] text-center sm:px-10 sm:pb-[77px]">
