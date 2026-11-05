@@ -45,25 +45,27 @@ export default function About() {
             >
               Quizlet
             </a>
-            . Before that, I spent most of my 7-year career in fintech,
-            designing everything from consumer money features to complex B2B
-            platforms.
+            . Before that, I spent most of my 7 years in product design in
+            fintech, from consumer money features to complex B2B platforms.
           </p>
 
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
-            I thrive in complex, fast-paced environments and have a bias
-            toward action. I like getting work shipped without letting the
-            quality of the experience slip. I studied business and computer
-            science and started out as a web developer, so I understand the
-            goals and tradeoffs my product and engineering partners are
-            working with.
+            I have a bias toward action and like getting work shipped without
+            letting the quality of the experience slip. I studied business and
+            computer science and started out as a web developer, so I
+            understand the goals and tradeoffs my product and engineering
+            partners are working with.
+          </p>
+
+          <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+            I see AI as a tool for both speed and quality. It lets me explore
+            more directions and prototype in code, so more of my time goes to
+            the judgment calls that make an experience good. I mostly work in
+            Claude Code and Claude Design.
           </p>
 
           <p className="mt-4 text-sm leading-relaxed text-ink-soft">
             Originally from ATL, now based in Jersey City and here to stay!
-          </p>
-
-          <p className="mt-4 text-sm leading-relaxed text-ink-soft">
             Interested in working with me?{" "}
             <a
               href="#contact"
