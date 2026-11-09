@@ -18,7 +18,7 @@ const milesdane = localFont({
 export const metadata: Metadata = {
   title: "Anjana Balamourougan — Product Designer",
   description:
-    "NJ based senior product designer with 6+ years of experience. Passionate about building delightful solutions with a practical lens.",
+    "NJ based senior product designer with 7 years of experience. Passionate about building delightful solutions with a practical lens.",
 };
 
 export default function RootLayout({
