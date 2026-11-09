@@ -52,7 +52,7 @@ const projects: Project[] = [
     companyLogoHeight: 20,
     title: "Adding a Family Plan",
     description:
-      "Created a new SKU and designed the end-to-end experience, driving a 1% increase in revenue.",
+      "Created a new SKU and designed the end-to-end experience, converting 90% at checkout.",
     caseStudy: addingFamilyPlan,
     slug: "family-plan",
     tags: [

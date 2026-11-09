@@ -193,7 +193,7 @@ export const addingFamilyPlan: CaseStudy = {
     {
       heading: "Problem space",
       paragraphs: [
-        "Leadership wanted Quizlet to offer a family plan, following similar subscription products that already had one. Given how price-sensitive our user base is, the hope was that a shared plan could make subscriptions more affordable while improving retention.",
+        "Leadership wanted Quizlet to offer a family plan to stay competitive with other consumer subscription offerings. Given how price-sensitive our user base is, the hypothesis was that a lower per-person price could convert more users, increasing overall subscription revenue while improving retention.",
       ],
     },
     {
@@ -202,12 +202,12 @@ export const addingFamilyPlan: CaseStudy = {
         <>
           <span className="font-medium text-ink">What we explored</span>
           {" "}
-          &mdash; Before committing engineering time, I wanted to test
-          whether &quot;family&quot; was actually how students thought about
-          sharing a subscription. I facilitated research sessions that
+          &mdash; Before committing engineering time, the team wanted to
+          test whether &quot;family&quot; was actually how students thought
+          about sharing a subscription. I facilitated research sessions that
           looked at the subscription space holistically, talking through
-          subscriptions outside of Quizlet to understand how students
-          think about money and prioritize what they pay for.
+          subscriptions outside of Quizlet to understand how students think
+          about money and prioritize what they pay for.
         </>,
         <>
           <span className="font-medium text-ink">What we tested</span>
@@ -220,9 +220,20 @@ export const addingFamilyPlan: CaseStudy = {
         <>
           <span className="font-medium text-ink">What we found</span>
           {" "}
-          &mdash; Contrary to the &quot;family plan&quot; framing, we
-          learned users were far more likely to share with classmates and
-          friends than with household or family members.
+          &mdash; Contrary to the &quot;family plan&quot; framing, users
+          were far more likely to share with classmates and friends than
+          with household members.
+        </>,
+        <>
+          <span className="font-medium text-ink">What I did with it</span>
+          {" "}
+          &mdash; I pushed back on the &quot;Family&quot; name and
+          positioning, sharing the research broadly with the design team, my
+          product triad, product directors, and the CPO. The decision sat
+          with executive and marketing leadership, and the name stayed.
+          Since I couldn&apos;t change the framing, I focused on what I
+          could control: making sure the invite and join experience worked
+          for people sharing outside a household.
         </>,
       ],
     },
@@ -232,22 +243,26 @@ export const addingFamilyPlan: CaseStudy = {
         <>
           <span className="font-medium text-ink">The constraints</span>
           {" "}
-          &mdash; Two constraints shaped my approach. Quizlet had just
-          rolled out a server-driven design system that intentionally
-          limited custom UI in favor of consistency and engineering
-          velocity, and the team had thin eng resourcing for this
-          project.
+          &mdash; Quizlet had just rolled out a server-driven design system
+          that intentionally limited custom UI in favor of consistency and
+          engineering velocity, and the team had thin eng resourcing for
+          this project.
         </>,
         <>
           <span className="font-medium text-ink">
-            How I worked within them
+            Decision: fit into the existing subscription flow
           </span>
           {" "}
-          &mdash; Rather than spend the limited timeline pushing for novel
-          UI, I focused my energy on flow and information architecture,
-          reusing proven patterns from group-order and settings flows, and
-          worked closely with engineering to keep every screen within what
-          the new system supported.
+          &mdash; I had to choose between building a separate landing page
+          and checkout experience for the family plan, as Headspace and
+          other companies do, or fitting it into Quizlet&apos;s existing
+          subscription flow and ecosystem. I chose to integrate it, because
+          it aligned with what we could realistically build and let us see
+          results faster. A separate experience would have meant custom UI
+          that the new design system limited, plus engineering time we
+          didn&apos;t have. I reused proven patterns from group-order and
+          settings flows, and worked closely with engineering to keep every
+          screen within what the new system supported.
         </>,
         <>
           <span className="font-medium text-ink">Working with the squad</span>
@@ -260,9 +275,33 @@ export const addingFamilyPlan: CaseStudy = {
       ],
     },
     {
+      heading: "Scoping decision: ship on price, learn after",
+      paragraphs: [
+        "The research pointed toward group-specific features for students, but none had been researched, validated, or scoped, and building them first would have delayed launch by a year or more. We launched with the simpler plan and used post-launch testing to start closing the value-communication gap.",
+      ],
+    },
+    {
       heading: "Usability testing",
       paragraphs: [
-        "After iterating on design with feedback from design critique and executive stakeholders, I conducted another round of research. I ran unmoderated usability testing with both free users and subscribers, focused specifically on activation, making sure users could successfully invite others to join their plan.",
+        "After iterating on design with feedback from design critique and executive stakeholders, I ran unmoderated usability testing with both free users and subscribers. I tested the full flow in one session: choosing a plan, purchasing, and adding a member. Participants then went through plan redemption from the invitee's side, since the plan only works if the person being invited can actually join.",
+        <>
+          <span className="font-medium text-ink">What I found</span>
+          {" "}
+          &mdash; 3 of 6 users were confused after purchasing because it
+          wasn&apos;t clear they could add people to the plan at any time.
+        </>,
+        <>
+          <span className="font-medium text-ink">What I changed</span>
+          {" "}
+          &mdash; I added language clarifying that members can be added
+          anytime.
+        </>,
+      ],
+    },
+    {
+      heading: "Post-launch iteration",
+      paragraphs: [
+        "After launch, we ran A/B tests on the plan card and checkout page to find the messaging that best communicated the plan's value. We tested CTA labels (such as \"Limited time offer\" vs. \"Upgrade now\") and pricing wording (percentage savings vs. a per-person monthly price).",
       ],
     },
     {
@@ -278,15 +317,15 @@ export const addingFamilyPlan: CaseStudy = {
       video: { src: "/videos/fp-proto.mp4" },
     },
     {
-      heading: "Post-launch iteration",
+      heading: "Reading the results",
       paragraphs: [
-        "After launch, we ran ongoing A/B tests on the plan card copy on the plans page and on the checkout copy. The goal was to more clearly communicate the plan's shared-access value and make sure users understood they could invite others after checking out, a friction point our data suggested was costing us conversions.",
+        "The plan converted well at checkout but moved revenue modestly. Our research suggested why. It launched as \"Family,\" and the only thing it offered students was a lower price. Features built around how students actually share hadn't been researched or scoped, and waiting for them would have delayed launch by a year or more. We shipped on price.",
       ],
     },
     {
-      heading: "Reflection",
+      heading: "What I'd change",
       paragraphs: [
-        "The family plan converted well at checkout, at 90%, but contributed modestly to overall revenue. Our own research had shown students wanted to share with friends and classmates, not family. The product still shipped as \"Quizlet Family,\" and design-system and eng constraints meant we launched without any feature built for that group dynamic. Price ended up being the plan's only real advantage. With more room, I'd push harder to use the research earlier, before naming and positioning were locked, and fight for at least one small feature built around how students actually study together.",
+        "With more room, I'd start validating group features in parallel with the launch, so there was a researched path to a second release instead of a gap between what students told us and what we shipped.",
       ],
     },
   ],
