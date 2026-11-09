@@ -13,8 +13,9 @@ export type CaseStudySection = {
   heading: string;
   paragraphs?: ReactNode[];
   subsections?: {
-    label: string;
-    text: string;
+    // Leave out to show the text without a label line.
+    label?: string;
+    text: ReactNode;
     image?: CaseStudyImage;
     images?: CaseStudyImage[];
     imageStack?: CaseStudyImage[];
@@ -277,7 +278,40 @@ export const addingFamilyPlan: CaseStudy = {
     {
       heading: "Scoping decision: ship on price, learn after",
       paragraphs: [
-        "The research pointed toward group-specific features for students, but none had been researched, validated, or scoped, and building them first would have delayed launch by a year or more. We launched with the simpler plan and used post-launch testing to start closing the value-communication gap.",
+        "The research pointed toward group-specific features for students, but none had been researched, validated, or scoped, and building them first would have delayed launch by a year or more. We wanted to keep momentum and build the foundation for group plans without waiting on group study features. We also had features in the pipeline, like voice and AI features, that we could use for unique pricing and positioning.",
+      ],
+      subsections: [
+        {
+          text: (
+            <>
+              <span className="font-medium text-ink">
+                From two group plans to one
+              </span>
+              {" "}
+              &mdash; We originally planned to launch two group plans, Duo and
+              Friends &amp; Family. I explored fitting four plans onto the
+              plans page, including grouping the shared plans under Plus
+              Unlimited. Four plans made the page crowded, fixing that meant
+              reworking a page we wanted to keep stable, and two new plans at
+              once would have made revenue changes hard to attribute. We
+              decided to ship one group plan.
+            </>
+          ),
+          carousel: [
+            {
+              src: "/images/family-plan-four-plans.webp",
+              alt: "Plans page exploration with four plan cards side by side: Quizlet Plus, Quizlet Plus Unlimited, Quizlet Plus Unlimited for 2 accounts, and Quizlet Plus Family for up to 6 accounts",
+              width: 2000,
+              height: 1469,
+            },
+            {
+              src: "/images/family-plan-tiers.webp",
+              alt: "Wireframe grouping the plans into two tiers: Quizlet Plus with an Individual plan, and Quizlet Plus Unlimited with shared value props above Individual, Duo, and Friends & Family plans",
+              width: 2000,
+              height: 1469,
+            },
+          ],
+        },
       ],
     },
     {

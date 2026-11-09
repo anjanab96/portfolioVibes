@@ -329,12 +329,16 @@ export default function CaseStudyModal({
 
               {section.subsections && (
                 <div className="mt-4 space-y-5">
-                  {section.subsections.map((sub) => (
-                    <div key={sub.label}>
-                      <p className="text-base font-medium text-ink">
-                        {sub.label}
-                      </p>
-                      <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                  {section.subsections.map((sub, i) => (
+                    <div key={sub.label ?? i}>
+                      {sub.label && (
+                        <p className="text-base font-medium text-ink">
+                          {sub.label}
+                        </p>
+                      )}
+                      <p
+                        className={`${sub.label ? "mt-1 " : ""}text-sm leading-relaxed text-ink-soft`}
+                      >
                         {sub.text}
                       </p>
                       {sub.image && (
