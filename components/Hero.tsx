@@ -4,10 +4,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { smoothScrollTo } from "@/lib/scrollTo";
 
-const IMPACT_PHRASES = [
-  "increase your deposit rate by 4%.",
-  "increase your subscription revenue by 1%.",
-  "decrease your operating expenses by $2000 per month.",
+// Each line is an ink lead-in followed by a coral payoff.
+const IMPACT_LINES = [
+  { lead: "Prototyping in code to know what works ", phrase: "before it ships." },
+  { lead: "Building 0→1 tools that ", phrase: "make teams 4x faster." },
+  { lead: "Speaking an engineer’s language, ", phrase: "thanks to a web dev background." },
+  { lead: "Designing flows that convert, ", phrase: "like 90% checkout on a new plan." },
+  { lead: "Making complex workflows simple, ", phrase: "from consumer apps to B2B." },
+  { lead: "Shipping fast ", phrase: "without letting quality slip." },
 ];
 
 export default function Hero() {
@@ -19,10 +23,10 @@ export default function Hero() {
     const intervalId = setInterval(() => {
       setVisible(false);
       timeoutId = setTimeout(() => {
-        setIndex((i) => (i + 1) % IMPACT_PHRASES.length);
+        setIndex((i) => (i + 1) % IMPACT_LINES.length);
         setVisible(true);
       }, 500);
-    }, 2900);
+    }, 4000);
     return () => {
       clearInterval(intervalId);
       clearTimeout(timeoutId);
@@ -53,13 +57,26 @@ export default function Hero() {
           <h1 className="font-display text-[36px] leading-tight text-ink sm:text-[48px] lg:text-[68px]">
             NJ based senior product designer with 7 years of experience.
           </h1>
-          <p
-            className={`mt-5 max-w-[320px] font-display text-lg text-ink transition-all duration-500 ease-[cubic-bezier(0,0,0.2,1)] sm:mt-6 sm:max-w-2xl sm:text-xl lg:max-w-[720px] lg:text-2xl ${
-              visible ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"
-            }`}
-          >
-            {"Together we can "}
-            <span className="text-coral">{IMPACT_PHRASES[index]}</span>
+          {/* All lines share one grid cell, so the block keeps the height of
+              the tallest line and the headline doesn't shift as they rotate. */}
+          <p className="mt-5 grid max-w-[320px] font-display text-lg text-ink sm:mt-6 sm:max-w-2xl sm:text-xl lg:max-w-[720px] lg:text-2xl">
+            {IMPACT_LINES.map((line, i) => {
+              const active = i === index;
+              return (
+                <span
+                  key={i}
+                  aria-hidden={!active}
+                  className={`[grid-area:1/1] transition-all duration-500 ease-[cubic-bezier(0,0,0.2,1)] ${
+                    active && visible
+                      ? "translate-y-0 opacity-100"
+                      : "-translate-y-1 opacity-0"
+                  }`}
+                >
+                  {line.lead}
+                  <span className="text-coral">{line.phrase}</span>
+                </span>
+              );
+            })}
           </p>
         </div>
         <a
