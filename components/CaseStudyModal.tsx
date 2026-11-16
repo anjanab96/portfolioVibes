@@ -28,7 +28,14 @@ type Tag = {
 // image centered, neighbors peeking in dimmed and grayscale, masked edges,
 // and pill dots — plus prev/next arrows that wrap around at either end.
 // Portrait images use a side-by-side layout instead (see isPortrait).
-function Carousel({ images }: { images: CaseStudyImage[] }) {
+function Carousel({
+  images,
+  label,
+}: {
+  images: CaseStudyImage[];
+  // Names the carousel for screen readers; must differ between carousels.
+  label: string;
+}) {
   const [index, setIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -118,6 +125,11 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
       <div
         ref={trackRef}
         onScroll={handleScroll}
+        // Focusable so keyboard users can scroll it with the arrow keys.
+        tabIndex={0}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label={label}
         className={`no-scrollbar carousel-mask flex snap-x snap-mandatory items-center gap-3 overflow-x-auto overscroll-x-contain scroll-smooth ${trackPadding}`}
       >
         {images.map((image, i) => {
@@ -456,7 +468,12 @@ export default function CaseStudyModal({
                           className="mt-4 h-auto w-full rounded-xl"
                         />
                       ))}
-                      {sub.carousel && <Carousel images={sub.carousel} />}
+                      {sub.carousel && (
+                        <Carousel
+                          images={sub.carousel}
+                          label={`${sub.label ?? section.heading} images`}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -536,7 +553,12 @@ export default function CaseStudyModal({
                 </div>
               )}
 
-              {section.carousel && <Carousel images={section.carousel} />}
+              {section.carousel && (
+                <Carousel
+                  images={section.carousel}
+                  label={`${section.heading} images`}
+                />
+              )}
 
               {section.video && (
                 <video
