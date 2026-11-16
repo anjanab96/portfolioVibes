@@ -193,6 +193,7 @@ export default function CaseStudyModal({
   companyLogoWidth,
   companyLogoHeight,
   onClose,
+  getReturnFocus,
 }: {
   caseStudy: CaseStudy;
   tags: Tag[];
@@ -201,8 +202,12 @@ export default function CaseStudyModal({
   companyLogoWidth: number;
   companyLogoHeight: number;
   onClose: () => void;
+  // The element to focus once the modal closes, if any.
+  getReturnFocus?: () => HTMLElement | null;
 }) {
   const [isVisible, setIsVisible] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const [isDesktop, setIsDesktop] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 640px)").matches
   );
@@ -234,6 +239,26 @@ export default function CaseStudyModal({
 
     const frame = requestAnimationFrame(() => setIsVisible(true));
 
+    // Make everything outside the modal inert, so keyboard focus and screen
+    // readers stay inside it while it's open.
+    const inerted: HTMLElement[] = [];
+    for (const el of Array.from(body.children)) {
+      if (
+        el instanceof HTMLElement &&
+        el !== rootRef.current &&
+        !el.inert &&
+        // Next's route announcer is a live region; leave it alone.
+        el.tagName !== "NEXT-ROUTE-ANNOUNCER"
+      ) {
+        el.inert = true;
+        inerted.push(el);
+      }
+    }
+
+    // Start focus on the title, so screen readers announce the dialog and
+    // read from the top of the case study.
+    titleRef.current?.focus({ preventScroll: true });
+
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") handleClose();
     }
@@ -243,6 +268,10 @@ export default function CaseStudyModal({
       html.style.overflow = originalHtmlOverflow;
       body.style.overflow = originalBodyOverflow;
       body.style.paddingRight = originalBodyPaddingRight;
+      inerted.forEach((el) => {
+        el.inert = false;
+      });
+      getReturnFocus?.()?.focus({ preventScroll: true });
       window.removeEventListener("keydown", handleKeyDown);
       cancelAnimationFrame(frame);
       if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
@@ -253,7 +282,10 @@ export default function CaseStudyModal({
   // Portal to <body> so the modal escapes WorkGrid's stacking context
   // (relative z-0) and layers above the fixed header.
   return createPortal(
-    <div className="fixed inset-0 z-[100] flex items-center justify-center sm:p-6">
+    <div
+      ref={rootRef}
+      className="fixed inset-0 z-[100] flex items-center justify-center sm:p-6"
+    >
       <div
         className={`modal-scrim absolute inset-0 bg-ink/60 backdrop-blur-sm ${isVisible ? "modal-visible" : ""}`}
         onClick={handleClose}
@@ -287,7 +319,9 @@ export default function CaseStudyModal({
           />
           <h2
             id="case-study-title"
-            className="mt-3 font-display text-3xl text-ink"
+            ref={titleRef}
+            tabIndex={-1}
+            className="mt-3 font-display text-3xl text-ink outline-none"
           >
             {caseStudy.title}
           </h2>

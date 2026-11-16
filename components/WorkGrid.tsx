@@ -205,6 +205,7 @@ export default function WorkGrid() {
   // True when the open case study was opened from a card on this visit, so
   // closing it can step back through history instead of adding an entry.
   const openedInAppRef = useRef(false);
+  const lastOpenedSlugRef = useRef<string | null>(null);
   const [focusedIndex, setFocusedIndex] = useState(MIDDLE_COPY * SLIDE_COUNT);
   const scrollRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -334,6 +335,19 @@ export default function WorkGrid() {
     if (!project.slug) return;
     window.history.pushState(null, "", caseStudyUrl(project.slug));
     openedInAppRef.current = true;
+    lastOpenedSlugRef.current = project.slug;
+  }
+
+  // After a case study opened from a card closes, focus goes back to that
+  // project's card (the real one, not a loop clone).
+  function returnFocusFor(slug: string) {
+    if (lastOpenedSlugRef.current !== slug) return null;
+    const i = projects.findIndex((p) => p.slug === slug);
+    return (
+      cardRefs.current[MIDDLE_COPY * SLIDE_COUNT + i]?.querySelector<HTMLElement>(
+        '[role="button"]'
+      ) ?? null
+    );
   }
 
   // Opened from a card: go back, so the browser's Back button and closing
@@ -440,7 +454,10 @@ export default function WorkGrid() {
       {/* Reading the URL opts this subtree into client-side rendering, so
           it sits in its own Suspense boundary and the grid still prerenders. */}
       <Suspense fallback={null}>
-        <CaseStudyFromUrl onClose={closeCaseStudy} />
+        <CaseStudyFromUrl
+          onClose={closeCaseStudy}
+          returnFocusFor={returnFocusFor}
+        />
       </Suspense>
     </section>
   );
@@ -452,7 +469,13 @@ function subscribeNoop() {
 
 // Renders the case study named by ?case=<slug>. The URL is the source of
 // truth, so opening a card, Back/Forward, and shared links all go through it.
-function CaseStudyFromUrl({ onClose }: { onClose: () => void }) {
+function CaseStudyFromUrl({
+  onClose,
+  returnFocusFor,
+}: {
+  onClose: () => void;
+  returnFocusFor: (slug: string) => HTMLElement | null;
+}) {
   const slug = useSearchParams().get(CASE_STUDY_PARAM);
   // The modal portals into document.body, so it can only render in the
   // browser — skip it during server rendering of a shared ?case= link.
@@ -474,6 +497,7 @@ function CaseStudyFromUrl({ onClose }: { onClose: () => void }) {
       companyLogoWidth={project.companyLogoWidth}
       companyLogoHeight={project.companyLogoHeight}
       onClose={onClose}
+      getReturnFocus={() => returnFocusFor(project.slug!)}
     />
   );
 }
