@@ -26,6 +26,7 @@ type Tag = {
 // Mirrors the work grid carousel: a scroll-snap track with the focused
 // image centered, neighbors peeking in dimmed and grayscale, masked edges,
 // and pill dots — plus prev/next arrows that wrap around at either end.
+// Portrait images use a side-by-side layout instead (see isPortrait).
 function Carousel({ images }: { images: CaseStudyImage[] }) {
   const [index, setIndex] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -38,14 +39,23 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
     };
   }, []);
 
+  // Portrait images (like plan cards) show several side by side, aligned
+  // to the text column and all in full color, so they can be compared.
+  const isPortrait = images.every((image) => image.height > image.width);
+
+  // Where a slide sits when it's the current one: the track's left padding
+  // for portrait, the center otherwise.
+  function slideTarget(track: HTMLDivElement, slide: HTMLDivElement) {
+    return isPortrait
+      ? slide.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft)
+      : slide.offsetLeft + slide.offsetWidth / 2 - track.clientWidth / 2;
+  }
+
   function scrollToSlide(i: number) {
     const track = trackRef.current;
     const slide = slideRefs.current[i];
     if (!track || !slide) return;
-    track.scrollTo({
-      left: slide.offsetLeft + slide.offsetWidth / 2 - track.clientWidth / 2,
-      behavior: "smooth",
-    });
+    track.scrollTo({ left: slideTarget(track, slide), behavior: "smooth" });
   }
 
   function handleScroll() {
@@ -53,12 +63,20 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
     rafRef.current = requestAnimationFrame(() => {
       const track = trackRef.current;
       if (!track) return;
-      const center = track.scrollLeft + track.clientWidth / 2;
+      // At the far end the last slide can't reach the left edge, so treat
+      // it as current there; otherwise arrows could never wrap around.
+      if (
+        isPortrait &&
+        track.scrollLeft >= track.scrollWidth - track.clientWidth - 2
+      ) {
+        setIndex(images.length - 1);
+        return;
+      }
       let closest = 0;
       let closestDist = Infinity;
       slideRefs.current.forEach((el, i) => {
         if (!el) return;
-        const dist = Math.abs(el.offsetLeft + el.offsetWidth / 2 - center);
+        const dist = Math.abs(slideTarget(track, el) - track.scrollLeft);
         if (dist < closestDist) {
           closestDist = dist;
           closest = i;
@@ -68,12 +86,24 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
     });
   }
 
+  const slideWidth = isPortrait ? "w-[38cqw] snap-start" : "w-[70cqw] snap-center";
+  const trackPadding = isPortrait
+    ? "px-8 scroll-px-8 sm:px-14 sm:scroll-px-14"
+    : "px-[15cqw]";
+
   function goPrev() {
     scrollToSlide(index === 0 ? images.length - 1 : index - 1);
   }
 
   function goNext() {
-    scrollToSlide(index === images.length - 1 ? 0 : index + 1);
+    const track = trackRef.current;
+    // Side-by-side slides run out of room before the last index; wrap as
+    // soon as the track is scrolled to its end.
+    const atEnd =
+      isPortrait &&
+      !!track &&
+      track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    scrollToSlide(atEnd || index === images.length - 1 ? 0 : index + 1);
   }
 
   return (
@@ -84,10 +114,10 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
       <div
         ref={trackRef}
         onScroll={handleScroll}
-        className="no-scrollbar carousel-mask flex snap-x snap-mandatory items-center gap-3 overflow-x-auto overscroll-x-contain scroll-smooth px-[15cqw]"
+        className={`no-scrollbar carousel-mask flex snap-x snap-mandatory items-center gap-3 overflow-x-auto overscroll-x-contain scroll-smooth ${trackPadding}`}
       >
         {images.map((image, i) => {
-          const isFocused = i === index;
+          const isFocused = isPortrait || i === index;
           return (
             <div
               key={image.src}
@@ -95,7 +125,7 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
                 slideRefs.current[i] = el;
               }}
               onClick={isFocused ? undefined : () => scrollToSlide(i)}
-              className={`w-[70cqw] shrink-0 snap-center transition-all duration-300 ease-out ${
+              className={`${slideWidth} shrink-0 transition-all duration-300 ease-out ${
                 isFocused
                   ? "scale-100 opacity-100"
                   : "scale-[0.88] cursor-pointer opacity-50 grayscale"

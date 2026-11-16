@@ -239,43 +239,6 @@ export const addingFamilyPlan: CaseStudy = {
       ],
     },
     {
-      heading: "Design approach",
-      paragraphs: [
-        <>
-          <span className="font-medium text-ink">The constraints</span>
-          {" "}
-          &mdash; Quizlet had just rolled out a server-driven design system
-          that intentionally limited custom UI in favor of consistency and
-          engineering velocity, and the team had thin eng resourcing for
-          this project.
-        </>,
-        <>
-          <span className="font-medium text-ink">
-            Decision: fit into the existing subscription flow
-          </span>
-          {" "}
-          &mdash; I had to choose between building a separate landing page
-          and checkout experience for the family plan, as Headspace and
-          other companies do, or fitting it into Quizlet&apos;s existing
-          subscription flow and ecosystem. I chose to integrate it, because
-          it aligned with what we could realistically build and let us see
-          results faster. A separate experience would have meant custom UI
-          that the new design system limited, plus engineering time we
-          didn&apos;t have. I reused proven patterns from group-order and
-          settings flows, and worked closely with engineering to keep every
-          screen within what the new system supported.
-        </>,
-        <>
-          <span className="font-medium text-ink">Working with the squad</span>
-          {" "}
-          &mdash; The squad hadn&apos;t worked closely with a designer
-          before, so part of the job was introducing lightweight critique
-          and explaining the &quot;why&quot; behind the patterns I was
-          asking for.
-        </>,
-      ],
-    },
-    {
       heading: "Scoping decision: ship on price, learn after",
       paragraphs: [
         "The research pointed toward group-specific features for students, but none had been researched, validated, or scoped, and building them first would have delayed launch by a year or more. We wanted to keep momentum and build the foundation for group plans without waiting on group study features. We also had features in the pipeline, like voice and AI features, that we could use for unique pricing and positioning.",
@@ -315,6 +278,94 @@ export const addingFamilyPlan: CaseStudy = {
       ],
     },
     {
+      heading: "Design approach",
+      paragraphs: [
+        <>
+          <span className="font-medium text-ink">The constraints</span>
+          {" "}
+          &mdash; Quizlet had just rolled out a server-driven design system
+          that intentionally limited custom UI in favor of consistency and
+          engineering velocity, and the team had thin eng resourcing for
+          this project.
+        </>,
+        <>
+          <span className="font-medium text-ink">
+            Decision: fit into the existing subscription flow
+          </span>
+          {" "}
+          &mdash; I had to choose between building a separate landing page
+          and checkout experience for the family plan, as Headspace and
+          other companies do, or fitting it into Quizlet&apos;s existing
+          subscription flow and ecosystem. I chose to integrate it, because
+          it aligned with what we could realistically build and let us see
+          results faster. A separate experience would have meant custom UI
+          that the new design system limited, plus engineering time we
+          didn&apos;t have. I reused proven patterns from group-order and
+          settings flows, and worked closely with engineering to keep every
+          screen within what the new system supported.
+        </>,
+      ],
+      subsections: [
+        {
+          text: (
+            <>
+              <span className="font-medium text-ink">
+                Plan card explorations
+              </span>
+              {" "}
+              &mdash; The design system limited what I could change on the
+              plan card, so I explored the options it did allow: the badge,
+              the call to action, and how the price was framed. I tried
+              emphasizing the plan name versus the price, a per-person price
+              versus a strikethrough discount, and CTAs like &quot;Start
+              7-day free trial,&quot; &quot;Upgrade,&quot; and &quot;Get
+              limited-time offer.&quot;
+            </>
+          ),
+          carousel: [
+            {
+              src: "/images/family-plan-card-1.webp",
+              alt: "Family Plan card with a Best deal badge, the plan name underlined, $8.75 per month ($1.75 per person), and a Start 7-day free trial button",
+              width: 935,
+              height: 1204,
+            },
+            {
+              src: "/images/family-plan-card-2.webp",
+              alt: "Family Plan card with a Best deal badge, the $8.75 per month ($1.75 per person) price underlined, and an Upgrade button",
+              width: 935,
+              height: 1204,
+            },
+            {
+              src: "/images/family-plan-card-3.webp",
+              alt: "Family Plan card with a $1.75 per person per month badge, $8.75 per month, and a Get limited-time offer button",
+              width: 935,
+              height: 1204,
+            },
+            {
+              src: "/images/family-plan-card-4.webp",
+              alt: "Family Plan card with a Limited time offer badge, the price struck through from $9.99 to $7.99 per month, and an Upgrade button",
+              width: 935,
+              height: 1204,
+            },
+          ],
+        },
+        {
+          text: (
+            <>
+              <span className="font-medium text-ink">
+                Working with the squad
+              </span>
+              {" "}
+              &mdash; The squad hadn&apos;t worked closely with a designer
+              before, so part of the job was introducing lightweight critique
+              and explaining the &quot;why&quot; behind the patterns I was
+              asking for.
+            </>
+          ),
+        },
+      ],
+    },
+    {
       heading: "Usability testing",
       paragraphs: [
         "After iterating on design with feedback from design critique and executive stakeholders, I ran unmoderated usability testing with both free users and subscribers. I tested the full flow in one session: choosing a plan, purchasing, and adding a member. Participants then went through plan redemption from the invitee's side, since the plan only works if the person being invited can actually join.",
@@ -341,12 +392,12 @@ export const addingFamilyPlan: CaseStudy = {
     {
       heading: "Project impact",
       stats: [
+        { value: "90%", label: "Checkout conversion for the family plan" },
         { value: "1%", label: "Overall increase in revenue" },
         {
           value: "0.4%",
           label: "Share of subscription revenue from the family plan",
         },
-        { value: "90%", label: "Checkout conversion for the family plan" },
       ],
       video: { src: "/videos/fp-proto.mp4" },
     },
