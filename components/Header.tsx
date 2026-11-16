@@ -150,8 +150,8 @@ export default function Header() {
             type="button"
             onClick={() => (isMenuMounted ? closeMenu() : openMenu())}
             className="hover-lift flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMenuOpen}
+            aria-label={isMenuMounted ? "Close menu" : "Open menu"}
+            aria-expanded={isMenuMounted}
             aria-controls="mobile-menu"
           >
             {isMenuOpen ? (
