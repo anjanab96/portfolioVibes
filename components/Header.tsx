@@ -152,6 +152,7 @@ export default function Header() {
             className="hover-lift flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
             {isMenuOpen ? (
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-6 w-6">
@@ -167,6 +168,7 @@ export default function Header() {
 
         {/* Tablet/desktop: nav links centered around the logo */}
         <nav
+          aria-label="Main"
           className={`hidden items-center justify-center transition-[gap,padding] duration-300 ease-out motion-reduce:transition-none md:flex ${
             isCompact ? "gap-6 px-8 py-1.5" : "gap-8 px-10 py-3"
           }`}
@@ -240,6 +242,8 @@ export default function Header() {
 
         {isMenuMounted && (
           <nav
+            id="mobile-menu"
+            aria-label="Main"
             className={`absolute inset-x-0 top-full z-10 mt-2 flex origin-top flex-col gap-1 rounded-2xl border border-white/40 bg-cream p-4 text-center shadow-lg backdrop-blur-xl backdrop-saturate-150 transition-all duration-200 ease-out md:hidden ${
               isMenuOpen
                 ? "translate-y-0 scale-100 opacity-100"

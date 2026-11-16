@@ -404,6 +404,7 @@ export default function WorkGrid() {
       id="work"
       className="relative z-0 mx-auto max-w-[1200px] px-6 pb-24 sm:px-10"
     >
+      <h2 className="sr-only">Work</h2>
       <div className="relative">
         {/* Full-viewport-width backdrop sized to just the card row (not the
             whole section) so the carousel's masked edges always fade into
