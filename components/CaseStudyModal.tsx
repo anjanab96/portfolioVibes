@@ -165,7 +165,8 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
         </svg>
       </button>
 
-      <div className="mt-4 flex items-center justify-center gap-2">
+      {/* Same 24px-tall hit areas as the work carousel dots. */}
+      <div className="mt-4 flex items-center justify-center">
         {images.map((image, i) => (
           <button
             key={image.src}
@@ -173,12 +174,16 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
             onClick={() => scrollToSlide(i)}
             aria-label={`Go to image ${i + 1}`}
             aria-current={i === index}
-            className={`h-2 rounded-full transition-all duration-300 ease-out ${
-              i === index
-                ? "w-6 bg-coral"
-                : "w-2 bg-ink-soft/25 hover:bg-ink-soft/45"
-            }`}
-          />
+            className="group -my-2 flex h-6 items-center rounded-full px-1"
+          >
+            <span
+              className={`h-2 rounded-full transition-all duration-300 ease-out ${
+                i === index
+                  ? "w-6 bg-coral"
+                  : "w-2 bg-ink-soft/25 group-hover:bg-ink-soft/45"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </div>

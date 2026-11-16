@@ -58,6 +58,11 @@ button,
   outline-color: var(--color-sage-card-muted);
 }
 
+/* The transparent outline above would otherwise hide the keyboard focus ring. */
+.hover-outline-olive:focus-visible {
+  outline-color: var(--color-olive-deep);
+}
+
 .logo-hover {
   display: inline-flex;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
