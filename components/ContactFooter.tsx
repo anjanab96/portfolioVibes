@@ -58,7 +58,8 @@ export default function ContactFooter() {
       </div>
 
       <div className="border-t border-cream/10 bg-cream py-5 text-center text-xs text-ink-soft">
-        🍃 Powered by Figma, Claude Code, &amp; Vercel. GitHub repo{" "}
+        <span aria-hidden="true">🍃</span> Powered by Figma, Claude Code, &amp;
+        Vercel. GitHub repo{" "}
         <a
           href="https://github.com/anjanab96/portfolioVibes"
           target="_blank"
@@ -67,7 +68,7 @@ export default function ContactFooter() {
         >
           here
         </a>{" "}
-        🍃
+        <span aria-hidden="true">🍃</span>
       </div>
     </footer>
   );

@@ -112,6 +112,8 @@ export default function About() {
             {[...funFacts, ...funFacts].map((fact, i) => (
               <div
                 key={`${fact.label}-${i}`}
+                // The second set only exists for the seamless loop.
+                aria-hidden={i >= funFacts.length || undefined}
                 className="flex w-24 shrink-0 flex-col items-center gap-2 text-center"
               >
                 <Image src={fact.icon} alt="" width={56} height={56} />
