@@ -35,7 +35,12 @@ export default function CursorSparkles() {
   const lastSpawnRef = useRef(0);
 
   useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
 
     function handleMouseMove(e: MouseEvent) {
       const now = performance.now();

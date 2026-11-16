@@ -12,6 +12,7 @@ import {
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import CaseStudyModal from "./CaseStudyModal";
+import { prefersReducedMotion } from "@/lib/motion";
 import {
   bankOperationsTooling,
   standardizingMoneyMovement,
@@ -394,7 +395,7 @@ export default function WorkGrid() {
     if (bestEl) {
       container.scrollTo({
         left: centeredScrollLeft(bestEl, container),
-        behavior: "smooth",
+        behavior: prefersReducedMotion() ? "instant" : "smooth",
       });
     }
   }

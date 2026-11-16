@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import { prefersReducedMotion } from "@/lib/motion";
 import type {
   CaseStudy,
   CaseStudyImage,
@@ -55,7 +56,10 @@ function Carousel({ images }: { images: CaseStudyImage[] }) {
     const track = trackRef.current;
     const slide = slideRefs.current[i];
     if (!track || !slide) return;
-    track.scrollTo({ left: slideTarget(track, slide), behavior: "smooth" });
+    track.scrollTo({
+      left: slideTarget(track, slide),
+      behavior: prefersReducedMotion() ? "instant" : "smooth",
+    });
   }
 
   function handleScroll() {

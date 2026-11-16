@@ -2,7 +2,14 @@ function easeOutCubic(t: number) {
   return 1 - Math.pow(1 - t, 3);
 }
 
+import { prefersReducedMotion } from "./motion";
+
 function animateScrollTo(targetY: number, duration: number) {
+  if (prefersReducedMotion()) {
+    window.scrollTo(0, targetY);
+    return;
+  }
+
   const startY = window.scrollY;
   const distance = targetY - startY;
   const startTime = performance.now();

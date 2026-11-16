@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { smoothScrollTo } from "@/lib/scrollTo";
+import { prefersReducedMotion } from "@/lib/motion";
 
 // Each line is an ink lead-in followed by a coral payoff.
 const IMPACT_LINES = [
@@ -19,6 +20,8 @@ export default function Hero() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
+    // With reduced motion, keep the first line instead of rotating.
+    if (prefersReducedMotion()) return;
     let timeoutId: ReturnType<typeof setTimeout>;
     const intervalId = setInterval(() => {
       setVisible(false);
