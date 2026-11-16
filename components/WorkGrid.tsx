@@ -3,6 +3,7 @@
 import {
   Suspense,
   useEffect,
+  useId,
   useLayoutEffect,
   useRef,
   useState,
@@ -133,15 +134,23 @@ const projects: Project[] = [
 function ProjectCard({
   project,
   onOpen,
+  isClone,
 }: {
   project: Project;
   onOpen: () => void;
+  // Loop clones stay clickable but are skipped by Tab and screen readers.
+  isClone: boolean;
 }) {
+  const id = useId();
   return (
     <div
       onClick={project.caseStudy ? onOpen : undefined}
+      // Keep a mouse click on a clone from focusing a hidden element.
+      onMouseDown={isClone ? (e) => e.preventDefault() : undefined}
       role={project.caseStudy ? "button" : undefined}
-      tabIndex={project.caseStudy ? 0 : undefined}
+      tabIndex={project.caseStudy ? (isClone ? -1 : 0) : undefined}
+      aria-labelledby={`${id}-title`}
+      aria-describedby={`${id}-description`}
       onKeyDown={
         project.caseStudy
           ? (e) => {
@@ -167,7 +176,7 @@ function ProjectCard({
       </div>
       <div className="flex flex-1 flex-col p-4">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="font-display text-[1.1rem] text-ink">
+          <h3 id={`${id}-title`} className="font-display text-[1.1rem] text-ink">
             {project.title}
           </h3>
           <Image
@@ -178,7 +187,9 @@ function ProjectCard({
             className="h-3 w-auto shrink-0"
           />
         </div>
-        <p className="mt-1 text-xs text-ink-soft">{project.description}</p>
+        <p id={`${id}-description`} className="mt-1 text-xs text-ink-soft">
+          {project.description}
+        </p>
         <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
           {project.tags.map((tag) => (
             <span
@@ -406,10 +417,14 @@ export default function WorkGrid() {
         <div
           ref={scrollRef}
           onScroll={handleScroll}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Case studies"
           className="no-scrollbar carousel-mask -mx-6 flex snap-x snap-mandatory items-center gap-6 overflow-x-auto scroll-smooth px-6 py-10 sm:-mx-10 sm:px-10"
         >
           {loopedProjects.map((project, i) => {
             const copy = Math.floor(i / SLIDE_COUNT);
+            const isClone = copy !== MIDDLE_COPY;
             const isFocused = i === focusedIndex;
             return (
               <div
@@ -417,7 +432,7 @@ export default function WorkGrid() {
                 ref={(el) => {
                   cardRefs.current[i] = el;
                 }}
-                inert={copy !== MIDDLE_COPY}
+                aria-hidden={isClone || undefined}
                 className={`w-[80%] shrink-0 snap-center transition-all duration-300 ease-out sm:w-[58%] lg:w-[52%] ${
                   isFocused
                     ? "scale-110 opacity-100"
@@ -427,6 +442,7 @@ export default function WorkGrid() {
                 <ProjectCard
                   project={project}
                   onOpen={() => openCaseStudy(project)}
+                  isClone={isClone}
                 />
               </div>
             );
@@ -440,7 +456,7 @@ export default function WorkGrid() {
             key={i}
             type="button"
             onClick={() => scrollToIndex(i)}
-            aria-label={`Go to project ${i + 1}`}
+            aria-label={`Go to ${projects[i].title}`}
             aria-current={i === focusedIndex % SLIDE_COUNT}
             className={`h-2 rounded-full transition-all duration-300 ease-out ${
               i === focusedIndex % SLIDE_COUNT
