@@ -58,7 +58,16 @@ export default function ContactFooter() {
       </div>
 
       <div className="border-t border-cream/10 bg-cream py-5 text-center text-xs text-ink-soft">
-        🍃 Powered by Figma, Claude Code, &amp; Vercel 🍃
+        🍃 Powered by Figma, Claude Code, &amp; Vercel. GitHub repo{" "}
+        <a
+          href="https://github.com/anjanab96/portfolioVibes"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:text-ink"
+        >
+          here
+        </a>{" "}
+        🍃
       </div>
     </footer>
   );
