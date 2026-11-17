@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Coral was darkened from #F08779 to meet WCAG AA (4.5:1) on cream. */
 @theme inline {
   --font-sans: var(--font-inter);
   --font-display: var(--font-milesdane);
@@ -8,8 +9,8 @@
   --color-ink: #26241d;
   --color-ink-soft: #55523f;
 
-  --color-coral: #F08779;
-  --color-coral-dark: #bd6042;
+  --color-coral: #c14e42;
+  --color-coral-dark: #aa3f34;
 
   --color-olive: #5F7A52;
   --color-olive-deep: #37642A;
