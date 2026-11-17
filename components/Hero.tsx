@@ -81,30 +81,28 @@ export default function Hero() {
               );
             })}
           </p>
-        </div>
-        <a
-          href="#work"
-          onClick={(e) => {
-            e.preventDefault();
-            smoothScrollTo("work");
-          }}
-          className="hover-lift group flex flex-col items-center gap-2 text-coral hover:text-coral-dark"
-        >
-          <span className="text-lg font-medium sm:text-xl">See my work</span>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            className="h-5 w-5 transition-transform duration-200 group-hover:translate-y-1"
+          <a
+            href="#work"
+            onClick={(e) => {
+              e.preventDefault();
+              smoothScrollTo("work");
+            }}
+            // Soft sage pill that deepens on hover.
+            className="group mt-10 flex items-center gap-2.5 rounded-full bg-[#d2d6bf] px-7 py-3 font-display text-xl text-ink transition-colors duration-300 hover:bg-[#c2c8aa] sm:mt-12"
           >
-            <path
-              d="M12 4v16M6 14l6 6 6-6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </a>
+            See my work
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              aria-hidden="true"
+              className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </div>
       </section>
     </div>
   );
