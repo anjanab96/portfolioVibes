@@ -51,7 +51,7 @@ export default function Hero() {
           width={1672}
           height={941}
           priority
-          className="h-[55%] w-auto max-w-none -translate-x-[12%] opacity-60 mix-blend-multiply sm:h-full sm:-translate-x-[10%] sm:opacity-70 lg:opacity-80"
+          className="h-[55%] w-auto max-w-none -translate-x-[12%] opacity-75 mix-blend-multiply sm:h-full sm:-translate-x-[10%] sm:opacity-85 lg:opacity-95"
         />
       </div>
 
@@ -62,7 +62,7 @@ export default function Hero() {
           </h1>
           {/* All lines share one grid cell, so the block keeps the height of
               the tallest line and the headline doesn't shift as they rotate. */}
-          <p className="mt-5 grid max-w-[320px] font-display text-lg text-ink sm:mt-6 sm:max-w-2xl sm:text-xl lg:max-w-[720px] lg:text-2xl">
+          <p className="mt-5 grid max-w-[320px] font-display text-lg text-ink-soft sm:mt-6 sm:max-w-2xl sm:text-xl lg:max-w-[720px] lg:text-2xl">
             {IMPACT_LINES.map((line, i) => {
               const active = i === index;
               return (
