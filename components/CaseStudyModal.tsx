@@ -181,7 +181,7 @@ function Carousel({
         </svg>
       </button>
 
-      {/* Same 24px-tall hit areas as the work carousel dots. */}
+      {/* Same 24px hit areas as the work carousel dots. */}
       <div className="mt-4 flex items-center justify-center">
         {images.map((image, i) => (
           <button
@@ -190,7 +190,7 @@ function Carousel({
             onClick={() => scrollToSlide(i)}
             aria-label={`Go to image ${i + 1}`}
             aria-current={i === index}
-            className="group -my-2 flex h-6 items-center rounded-full px-1"
+            className="group -my-2 flex h-6 items-center rounded-full px-2"
           >
             <span
               className={`h-2 rounded-full transition-all duration-300 ease-out ${

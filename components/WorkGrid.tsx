@@ -452,8 +452,8 @@ export default function WorkGrid() {
         </div>
       </div>
 
-      {/* Each button pads its dot to a 24px-tall hit area; the padding
-          stands in for the gap, so the dots look the same. */}
+      {/* Each button pads its dot to at least a 24px hit area; the padding
+          stands in for the gap between dots. */}
       <div className="mt-6 flex items-center justify-center">
         {Array.from({ length: SLIDE_COUNT }).map((_, i) => (
           <button
@@ -462,7 +462,7 @@ export default function WorkGrid() {
             onClick={() => scrollToIndex(i)}
             aria-label={`Go to ${projects[i].title}`}
             aria-current={i === focusedIndex % SLIDE_COUNT}
-            className="group -my-2 flex h-6 items-center rounded-full px-1"
+            className="group -my-2 flex h-6 items-center rounded-full px-2"
           >
             <span
               className={`h-2 rounded-full transition-all duration-300 ease-out ${
